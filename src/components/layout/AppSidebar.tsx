@@ -1,4 +1,5 @@
-import { Activity } from "lucide-react";
+import { Activity, ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 
 import { navigation } from "@/config/navigation";
@@ -23,9 +24,26 @@ export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const pathname = useRouterState({ select: (router) => router.location.pathname });
+  const [expandedItems, setExpandedItems] = useState<string[]>(() =>
+    navigation.filter((item) => item.children?.some((child) => pathname === child.path)).map((item) => item.label),
+  );
+
+  useEffect(() => {
+    const activeSection = navigation.find((item) => item.children?.some((child) => pathname === child.path));
+    if (activeSection) {
+      setExpandedItems((items) => (items.includes(activeSection.label) ? items : [...items, activeSection.label]));
+    }
+  }, [pathname]);
+
+  const toggleItem = (label: string) => {
+    setExpandedItems((items) => (items.includes(label) ? items.filter((item) => item !== label) : [...items, label]));
+  };
 
   return (
-    <Sidebar collapsible="icon" className="border-sidebar-border">
+  <Sidebar
+  collapsible="icon"
+  className="border-green-900 bg-green-950 text-green-50"
+>
       <SidebarHeader className="h-18 justify-center px-3">
         <div className="flex items-center justify-center gap-3 overflow-hidden px-1">
           <BrandMark />
@@ -43,17 +61,45 @@ export function AppSidebar() {
           <SidebarGroupLabel className="mb-2 px-2 uppercase text-sidebar-foreground/40">Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="gap-1.5">
-              {navigation.map((item) => (
+              {navigation.map((item) => {
+                const hasChildren = item.children !== undefined;
+                const expanded = expandedItems.includes(item.label);
+
+                return (
                 <SidebarMenuItem key={item.path}>
-                  <SidebarMenuButton asChild isActive={pathname === item.path} tooltip={item.label} className="h-10 px-3 data-[active=true]:shadow-sm">
-                    <Link to={item.path} aria-label={item.label}>
-                      <item.icon />
-                      <span>{item.label}</span>
-                    </Link>
+                  <SidebarMenuButton
+                    asChild={!hasChildren}
+                    isActive={pathname === item.path || item.children?.some((child) => pathname === child.path)}
+                    tooltip={item.label}
+                    className="h-10 px-3 data-[active=true]:shadow-sm"
+                    onClick={hasChildren ? () => toggleItem(item.label) : undefined}
+                  >
+                    {hasChildren ? (
+                      <>
+                        <item.icon />
+                        <span>{item.label}</span>
+                        {!collapsed ? <ChevronDown className={`ml-auto transition-transform ${expanded ? "rotate-180" : ""}`} /> : null}
+                      </>
+                    ) : (
+                      <Link to={item.path} aria-label={item.label}>
+                        <item.icon />
+                        <span>{item.label}</span>
+                      </Link>
+                    )}
                   </SidebarMenuButton>
                   {item.badge && !collapsed ? <span className="absolute right-3 top-2.5 flex size-5 items-center justify-center rounded-full bg-warning text-[10px] font-bold text-warning-foreground">{item.badge}</span> : null}
+                  {hasChildren && expanded && !collapsed && item.children.length > 0 ? (
+                    <div className="ml-5 border-l border-sidebar-border pl-3">
+                      {item.children.map((child) => (
+                        <Link key={child.path} to={child.path} className="block py-1.5 text-xs text-sidebar-foreground/60 transition-colors hover:text-sidebar-foreground" activeProps={{ className: "block py-1.5 text-xs text-sidebar-foreground" }}>
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ) : null}
                 </SidebarMenuItem>
-              ))}
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
