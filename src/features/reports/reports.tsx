@@ -1,8 +1,8 @@
-import { FeaturePage } from '@/features/_shared/FeaturePage'
+import { FeatureView } from '@/features/_shared/FeatureView'
 
 export function ReportsPage() {
   return (
-    <FeaturePage
+    <FeatureView
       title="Rapports"
       subtitle="Indicateurs et synthèses de performance."
     />

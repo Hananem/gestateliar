@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { PayrollWorkspace } from '@/features/payroll/components/PayrollWorkspace'
+import { PayrollDeductions } from '@/features/payroll/deductions/components/PayrollDeductions'
 
 function RetenuesPage() {
-  return <PayrollWorkspace page="deductions" />
+  return <PayrollDeductions />
 }
 
 export const Route = createFileRoute('/payroll/retenues')({

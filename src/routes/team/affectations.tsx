@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { TeamWorkspace } from '@/features/team/components/TeamWorkspace'
+import { TeamAssignments } from '@/features/team/assignments/components/TeamAssignments'
 
 function AffectationsPage() {
-  return <TeamWorkspace page="assignments" />
+  return <TeamAssignments />
 }
 
 export const Route = createFileRoute('/team/affectations')({

@@ -1,8 +1,8 @@
-import { FeaturePage } from '@/features/_shared/FeaturePage'
+import { FeatureView } from '@/features/_shared/FeatureView'
 
 export function StockPage() {
   return (
-    <FeaturePage
+    <FeatureView
       title="Stock"
       subtitle="Suivi des matières et articles disponibles."
     />

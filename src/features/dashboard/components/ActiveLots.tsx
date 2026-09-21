@@ -5,9 +5,14 @@ import { Progress } from '@/components/ui/progress'
 import { SectionHeading } from '@/components/shared/Shared'
 import { lots } from '@/features/dashboard/data'
 import { useLanguage } from '@/lib/i18n'
+import { useState } from 'react'
+import { TablePagination } from '@/features/_shared/TablePagination'
 
 export function ActiveLots() {
   const { t } = useLanguage()
+  const [pageNumber, setPageNumber] = useState(1)
+  const pageCount = Math.max(1, Math.ceil(lots.length / 10))
+  const visibleLots = lots.slice((pageNumber - 1) * 10, pageNumber * 10)
 
   return (
     <Card className="min-w-0 border-border/80 shadow-card">
@@ -30,7 +35,7 @@ export function ActiveLots() {
               </tr>
             </thead>
             <tbody>
-              {lots.map((lot) => (
+              {visibleLots.map((lot) => (
                 <tr
                   key={lot.ref}
                   className="border-b border-border/70 last:border-0"
@@ -68,6 +73,11 @@ export function ActiveLots() {
             </tbody>
           </table>
         </div>
+        <TablePagination
+          page={pageNumber}
+          pageCount={pageCount}
+          onPageChange={setPageNumber}
+        />
       </CardContent>
     </Card>
   )

@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ExpensesWorkspace } from '@/features/expenses/components/ExpensesWorkspace'
+import { ExpensesReport } from '@/features/reports/expenses/components/ExpensesReport'
 
 function DepensesReportPage() {
-  return <ExpensesWorkspace page="report" />
+  return <ExpensesReport />
 }
 
 export const Route = createFileRoute('/reports/depenses')({

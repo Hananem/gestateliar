@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ProductionWorkspace } from '@/features/production/components/ProductionWorkspace'
+import { ProductionConsumption } from '@/features/production/consumption/components/ProductionConsumption'
 
 function ConsommationPage() {
-  return <ProductionWorkspace page="consumption" />
+  return <ProductionConsumption />
 }
 
 export const Route = createFileRoute('/production/consommation')({

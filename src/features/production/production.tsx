@@ -1,8 +1,8 @@
-import { FeaturePage } from '@/features/_shared/FeaturePage'
+import { FeatureView } from '@/features/_shared/FeatureView'
 
 export function ProductionPage() {
   return (
-    <FeaturePage
+    <FeatureView
       title="Production"
       subtitle="Pilotage des lots et des étapes de fabrication."
     />

@@ -20,14 +20,14 @@ export function DashboardHeader() {
     <header className="sticky top-0 z-20 flex h-18 items-center gap-3 border-b bg-background/95 px-4 backdrop-blur md:px-6">
       <SidebarTrigger className="size-9 border border-border bg-background shadow-xs" />
       <div className="relative hidden w-full max-w-sm md:block">
-        <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+        <Search className="absolute start-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
         <Input
-          className="h-10 bg-muted/55 pl-9 shadow-none"
+          className="h-10 bg-muted/55 ps-9 shadow-none"
           placeholder={t('Rechercher un lot, un article...')}
           aria-label={t('Rechercher')}
         />
       </div>
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ms-auto flex min-w-0 items-center gap-2">
         <Button
           variant="outline"
           size="sm"
@@ -44,7 +44,7 @@ export function DashboardHeader() {
           aria-label={t('Notifications')}
         >
           <Bell />
-          <span className="absolute right-1.5 top-1.5 size-2 rounded-full border-2 border-background bg-destructive" />
+          <span className="absolute end-1.5 top-1.5 size-2 rounded-full border-2 border-background bg-destructive" />
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -54,7 +54,7 @@ export function DashboardHeader() {
                   FB
                 </AvatarFallback>
               </Avatar>
-              <span className="hidden text-left lg:block">
+              <span className="hidden text-start lg:block">
                 <span className="block text-xs font-semibold leading-4">
                   Fatima Benali
                 </span>

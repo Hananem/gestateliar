@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ExpensesWorkspace } from '@/features/expenses/components/ExpensesWorkspace'
+import { RecurringExpenses } from '@/features/expenses/recurring/components/RecurringExpenses'
 
 function DepensesRecurrentesPage() {
-  return <ExpensesWorkspace page="recurring" />
+  return <RecurringExpenses />
 }
 
 export const Route = createFileRoute('/expenses/depenses-recurrentes')({

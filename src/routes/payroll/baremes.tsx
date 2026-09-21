@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { PayrollWorkspace } from '@/features/payroll/components/PayrollWorkspace'
+import { PayrollRates } from '@/features/payroll/rates/components/PayrollRates'
 
 function BaremesPage() {
-  return <PayrollWorkspace page="rates" />
+  return <PayrollRates />
 }
 
 export const Route = createFileRoute('/payroll/baremes')({

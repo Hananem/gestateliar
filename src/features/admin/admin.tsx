@@ -1,8 +1,8 @@
-import { FeaturePage } from '@/features/_shared/FeaturePage'
+import { FeatureView } from '@/features/_shared/FeatureView'
 
 export function AdminPage() {
   return (
-    <FeaturePage
+    <FeatureView
       title="Administration"
       subtitle="Paramètres et gestion de l’espace atelier."
     />

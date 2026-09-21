@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { StockWorkspace } from '@/features/stock/components/StockWorkspace'
+import { StockRolls } from '@/features/stock/rolls/components/StockRolls'
 
 function RouleauxLotsPage() {
-  return <StockWorkspace page="rolls" />
+  return <StockRolls />
 }
 
 export const Route = createFileRoute('/stock/rouleaux-lots')({

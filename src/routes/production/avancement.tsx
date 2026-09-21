@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ProductionWorkspace } from '@/features/production/components/ProductionWorkspace'
+import { ProductionProgress } from '@/features/production/progress/components/ProductionProgress'
 
 function AvancementPage() {
-  return <ProductionWorkspace page="progress" />
+  return <ProductionProgress />
 }
 
 export const Route = createFileRoute('/production/avancement')({

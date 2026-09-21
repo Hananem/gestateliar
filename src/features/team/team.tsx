@@ -1,8 +1,8 @@
-import { FeaturePage } from '@/features/_shared/FeaturePage'
+import { FeatureView } from '@/features/_shared/FeatureView'
 
 export function TeamPage() {
   return (
-    <FeaturePage
+    <FeatureView
       title="Équipe"
       subtitle="Suivi des collaborateurs de l’atelier."
     />

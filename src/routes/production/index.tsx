@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ProductionWorkspace } from '@/features/production/components/ProductionWorkspace'
+import { ProductionOverview } from '@/features/production/overview/components/ProductionOverview'
 
 function ProductionIndexPage() {
-  return <ProductionWorkspace page="overview" />
+  return <ProductionOverview />
 }
 
 export const Route = createFileRoute('/production/')({

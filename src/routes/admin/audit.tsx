@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { AdminWorkspace } from '@/features/admin/components/AdminWorkspace'
+import { AdminAudit } from '@/features/admin/audit/components/AdminAudit'
 
 function AuditPage() {
-  return <AdminWorkspace page="audit" />
+  return <AdminAudit />
 }
 
 export const Route = createFileRoute('/admin/audit')({ component: AuditPage })

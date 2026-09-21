@@ -1,4 +1,4 @@
-import { PageShell } from '@/components/layout/PageShell'
+import { AppShell } from '@/components/layout/AppShell'
 import { ActiveLots } from '@/features/dashboard/components/ActiveLots'
 import { ExpensesChart } from '@/features/dashboard/components/ExpensesChart'
 import { ProductionChart } from '@/features/dashboard/components/ProductionChart'
@@ -12,7 +12,7 @@ export function Dashboard() {
   const { t } = useLanguage()
 
   return (
-    <PageShell>
+    <AppShell>
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="mb-1 text-xs font-semibold uppercase text-primary">
@@ -42,6 +42,6 @@ export function Dashboard() {
         <WorkerProductivity />
         <ExpensesChart />
       </section>
-    </PageShell>
+    </AppShell>
   )
 }

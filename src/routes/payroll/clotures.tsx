@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { PayrollWorkspace } from '@/features/payroll/components/PayrollWorkspace'
+import { PayrollClosures } from '@/features/payroll/closures/components/PayrollClosures'
 
 function CloturesPage() {
-  return <PayrollWorkspace page="closures" />
+  return <PayrollClosures />
 }
 
 export const Route = createFileRoute('/payroll/clotures')({

@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { TeamWorkspace } from '@/features/team/components/TeamWorkspace'
+import { TeamDailyWork } from '@/features/team/daily-work/components/TeamDailyWork'
 
 function TravailPage() {
-  return <TeamWorkspace page="dailyWork" />
+  return <TeamDailyWork />
 }
 
 export const Route = createFileRoute('/team/travail')({

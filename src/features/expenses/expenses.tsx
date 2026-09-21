@@ -1,8 +1,8 @@
-import { FeaturePage } from '@/features/_shared/FeaturePage'
+import { FeatureView } from '@/features/_shared/FeatureView'
 
-export function ExpensesPage() {
+export function Expenses() {
   return (
-    <FeaturePage
+    <FeatureView
       title="Dépenses"
       subtitle="Suivi des charges et dépenses de l’atelier."
     />

@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { AdminWorkspace } from '@/features/admin/components/AdminWorkspace'
+import { AdminSettings } from '@/features/admin/settings/components/AdminSettings'
 
 function ParametresPage() {
-  return <AdminWorkspace page="settings" />
+  return <AdminSettings />
 }
 
 export const Route = createFileRoute('/admin/parametres')({

@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { PayrollWorkspace } from '@/features/payroll/components/PayrollWorkspace'
+import { PayrollMonthly } from '@/features/payroll/monthly/components/PayrollMonthly'
 
 function CalculMensuelPage() {
-  return <PayrollWorkspace page="monthly" />
+  return <PayrollMonthly />
 }
 
 export const Route = createFileRoute('/payroll/calcul-mensuel')({
