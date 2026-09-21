@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Subpage } from "@/features/_shared/Subpage";
+import { ProductionWorkspace } from "@/features/production/components/ProductionWorkspace";
 
 function OperationsPage() {
-  return <Subpage title="Opérations" subtitle="Organisation des opérations de production." />;
+  return <ProductionWorkspace page="operations" />;
 }
 
 export const Route = createFileRoute("/production/operations")({ component: OperationsPage });

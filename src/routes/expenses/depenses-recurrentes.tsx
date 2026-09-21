@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Subpage } from "@/features/_shared/Subpage";
+import { ExpensesWorkspace } from "@/features/expenses/components/ExpensesWorkspace";
 
 function DepensesRecurrentesPage() {
-  return <Subpage title="Dépenses récurrentes" subtitle="Gestion des dépenses récurrentes." />;
+  return <ExpensesWorkspace page="recurring" />;
 }
 
 export const Route = createFileRoute("/expenses/depenses-recurrentes")({ component: DepensesRecurrentesPage });

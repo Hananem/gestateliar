@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Subpage } from "@/features/_shared/Subpage";
+import { AdminWorkspace } from "@/features/admin/components/AdminWorkspace";
 
 function AuditPage() {
-  return <Subpage title="Audit" subtitle="Historique des actions effectuées dans l’application." />;
+  return <AdminWorkspace page="audit" />;
 }
 
 export const Route = createFileRoute("/admin/audit")({ component: AuditPage });

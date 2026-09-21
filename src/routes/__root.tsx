@@ -2,6 +2,7 @@ import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import { LanguageProvider } from '@/lib/i18n'
 
 import appCss from '../styles.css?url'
 
@@ -31,26 +32,28 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="fr" dir="ltr">
       <head>
         <HeadContent />
       </head>
 
       <body>
         <TooltipProvider>
-          {children}
+          <LanguageProvider>
+            {children}
 
-          <TanStackDevtools
-            config={{
-              position: 'bottom-right',
-            }}
-            plugins={[
-              {
-                name: 'Tanstack Router',
-                render: <TanStackRouterDevtoolsPanel />,
-              },
-            ]}
-          />
+            <TanStackDevtools
+              config={{
+                position: 'bottom-right',
+              }}
+              plugins={[
+                {
+                  name: 'Tanstack Router',
+                  render: <TanStackRouterDevtoolsPanel />,
+                },
+              ]}
+            />
+          </LanguageProvider>
 
           <Scripts />
         </TooltipProvider>

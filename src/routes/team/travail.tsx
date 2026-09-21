@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Subpage } from "@/features/_shared/Subpage";
+import { TeamWorkspace } from "@/features/team/components/TeamWorkspace";
 
 function TravailPage() {
-  return <Subpage title="Travail" subtitle="Suivi du travail réalisé par l’équipe." />;
+  return <TeamWorkspace page="dailyWork" />;
 }
 
 export const Route = createFileRoute("/team/travail")({ component: TravailPage });

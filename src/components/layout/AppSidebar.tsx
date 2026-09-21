@@ -4,6 +4,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 
 import { navigation } from "@/config/navigation";
 import { BrandMark } from "@/components/shared/Shared";
+import { useLanguage } from "@/lib/i18n";
 import {
   Sidebar,
   SidebarContent,
@@ -24,6 +25,7 @@ export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const pathname = useRouterState({ select: (router) => router.location.pathname });
+  const { language, t } = useLanguage();
   const [expandedItems, setExpandedItems] = useState<string[]>(() =>
     navigation.filter((item) => item.children?.some((child) => pathname === child.path)).map((item) => item.label),
   );
@@ -41,6 +43,7 @@ export function AppSidebar() {
 
   return (
   <Sidebar
+  side={language === "ar" ? "right" : "left"}
   collapsible="icon"
   className="border-green-900 bg-green-950 text-green-50"
 >
@@ -58,7 +61,7 @@ export function AppSidebar() {
       <SidebarSeparator />
       <SidebarContent className="px-1 py-3">
         <SidebarGroup>
-          <SidebarGroupLabel className="mb-2 px-2 uppercase text-sidebar-foreground/40">Navigation</SidebarGroupLabel>
+          <SidebarGroupLabel className="mb-2 px-2 uppercase text-sidebar-foreground/40">{t("Navigation")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="gap-1.5">
               {navigation.map((item) => {
@@ -77,13 +80,13 @@ export function AppSidebar() {
                     {hasChildren ? (
                       <>
                         <item.icon />
-                        <span>{item.label}</span>
+                        <span>{t(item.label)}</span>
                         {!collapsed ? <ChevronDown className={`ml-auto transition-transform ${expanded ? "rotate-180" : ""}`} /> : null}
                       </>
                     ) : (
-                      <Link to={item.path} aria-label={item.label}>
+                      <Link to={item.path} aria-label={t(item.label)}>
                         <item.icon />
-                        <span>{item.label}</span>
+                        <span>{t(item.label)}</span>
                       </Link>
                     )}
                   </SidebarMenuButton>
@@ -92,7 +95,7 @@ export function AppSidebar() {
                     <div className="ml-5 border-l border-sidebar-border pl-3">
                       {item.children.map((child) => (
                         <Link key={child.path} to={child.path} className="block py-1.5 text-xs text-sidebar-foreground/60 transition-colors hover:text-sidebar-foreground" activeProps={{ className: "block py-1.5 text-xs text-sidebar-foreground" }}>
-                          {child.label}
+                          {t(child.label)}
                         </Link>
                       ))}
                     </div>
@@ -107,7 +110,7 @@ export function AppSidebar() {
       <SidebarFooter className="p-3">
         <div className="flex items-center gap-3 rounded-md border border-sidebar-border bg-sidebar-accent/50 p-2 group-data-[collapsible=icon]:border-0 group-data-[collapsible=icon]:bg-transparent group-data-[collapsible=icon]:p-0">
           <div className="flex size-8 shrink-0 items-center justify-center rounded-md bg-success-soft text-success"><Activity className="size-4" /></div>
-          {!collapsed ? <div className="min-w-0"><p className="text-xs font-semibold text-sidebar-foreground">Atelier opérationnel</p><p className="text-[10px] text-sidebar-foreground/50">Dernière synchro : 08:01</p></div> : null}
+          {!collapsed ? <div className="min-w-0"><p className="text-xs font-semibold text-sidebar-foreground">{t("Atelier opérationnel")}</p><p className="text-[10px] text-sidebar-foreground/50">{t("Dernière synchro : 08:01")}</p></div> : null}
         </div>
       </SidebarFooter>
       <SidebarRail />

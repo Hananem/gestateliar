@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Subpage } from "@/features/_shared/Subpage";
+import { ReportsWorkspace } from "@/features/reports/components/ReportsWorkspace";
 
 function ProductiviteReportPage() {
-  return <Subpage title="Productivité" subtitle="Rapport de productivité de l’équipe." />;
+  return <ReportsWorkspace page="productivity" />;
 }
 
 export const Route = createFileRoute("/reports/productivite")({ component: ProductiviteReportPage });

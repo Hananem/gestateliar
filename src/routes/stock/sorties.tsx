@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Subpage } from "@/features/_shared/Subpage";
+import { StockWorkspace } from "@/features/stock/components/StockWorkspace";
 
 function SortiesPage() {
-  return <Subpage title="Sorties" subtitle="Suivi des sorties de matières et d’articles." />;
+  return <StockWorkspace page="issues" />;
 }
 
 export const Route = createFileRoute("/stock/sorties")({ component: SortiesPage });

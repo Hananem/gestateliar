@@ -6,24 +6,27 @@ import { RecentActivity } from '@/features/dashboard/components/RecentActivity'
 import { StatsCards } from '@/features/dashboard/components/StatsCards'
 import { StockAlerts } from '@/features/dashboard/components/StockAlerts'
 import { WorkerProductivity } from '@/features/dashboard/components/WorkerProductivity'
+import { useLanguage } from '@/lib/i18n'
 
 export function Dashboard() {
+  const { t } = useLanguage()
+
   return (
     <PageShell>
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="mb-1 text-xs font-semibold uppercase text-primary">
-            Dimanche 20 septembre
+            {t('Dimanche 20 septembre')}
           </p>
           <h1 className="font-display text-2xl font-bold text-foreground md:text-[28px]">
-            Bonjour Fatima,
+            {t('Bonjour Fatima,')}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Voici l’état de votre atelier aujourd’hui.
+            {t('Voici l’état de votre atelier aujourd’hui.')}
           </p>
         </div>
         <div className="rounded-md border bg-background px-3 py-2 text-xs text-muted-foreground shadow-xs">
-          Données actualisées à 08:02
+          {t('Données actualisées à 08:02')}
         </div>
       </div>
       <StatsCards />

@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Subpage } from "@/features/_shared/Subpage";
+import { AdminWorkspace } from "@/features/admin/components/AdminWorkspace";
 
 function RolesPermissionsPage() {
-  return <Subpage title="Rôles & permissions" subtitle="Gestion des rôles et des permissions." />;
+  return <AdminWorkspace page="roles" />;
 }
 
 export const Route = createFileRoute("/admin/roles-permissions")({ component: RolesPermissionsPage });

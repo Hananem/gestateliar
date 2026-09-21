@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Subpage } from "@/features/_shared/Subpage";
+import { PayrollWorkspace } from "@/features/payroll/components/PayrollWorkspace";
 
 function CalculMensuelPage() {
-  return <Subpage title="Calcul mensuel" subtitle="Calcul et préparation de la paie mensuelle." />;
+  return <PayrollWorkspace page="monthly" />;
 }
 
 export const Route = createFileRoute("/payroll/calcul-mensuel")({ component: CalculMensuelPage });

@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Subpage } from "@/features/_shared/Subpage";
+import { PayrollWorkspace } from "@/features/payroll/components/PayrollWorkspace";
 
 function PrimesPage() {
-  return <Subpage title="Primes" subtitle="Gestion des primes et récompenses." />;
+  return <PayrollWorkspace page="bonuses" />;
 }
 
 export const Route = createFileRoute("/payroll/primes")({ component: PrimesPage });

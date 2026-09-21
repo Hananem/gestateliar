@@ -2,14 +2,17 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { SectionHeading } from '@/components/shared/Shared'
 import { activityItems } from '@/features/dashboard/data'
 import { cn } from '@/lib/utils'
+import { useLanguage } from '@/lib/i18n'
 
 export function RecentActivity() {
+  const { t } = useLanguage()
+
   return (
     <Card className="min-w-0 border-border/80 shadow-card">
       <CardHeader className="p-5 pb-2">
         <SectionHeading
-          title="Activité récente"
-          subtitle="Derniers mouvements dans l’atelier"
+          title={t('Activité récente')}
+          subtitle={t('Derniers mouvements dans l’atelier')}
         />
       </CardHeader>
       <CardContent className="p-5 pt-2">

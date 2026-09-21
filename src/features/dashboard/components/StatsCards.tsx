@@ -2,12 +2,15 @@ import { Card, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { TrendingDown, TrendingUp } from 'lucide-react'
 import { stats } from '@/features/dashboard/data'
+import { useLanguage } from '@/lib/i18n'
 
 export function StatsCards() {
+  const { t } = useLanguage()
+
   return (
     <section
       className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
-      aria-label="Indicateurs clés"
+      aria-label={t('Indicateurs clés')}
     >
       {stats.map((stat) => (
         <Card
@@ -34,13 +37,13 @@ export function StatsCards() {
               </div>
             </div>
             <p className="mt-4 text-xs font-medium text-muted-foreground">
-              {stat.label}
+              {t(stat.label)}
             </p>
             <div className="mt-1 flex items-baseline justify-between gap-2">
               <p className="font-display text-2xl font-bold tabular-nums text-foreground">
                 {stat.value}
               </p>
-              <p className="text-[10px] text-muted-foreground">{stat.note}</p>
+              <p className="text-[10px] text-muted-foreground">{t(stat.note)}</p>
             </div>
           </CardContent>
         </Card>

@@ -42,7 +42,7 @@ export const expenseConfig = {
 export const stats = [
   {
     label: 'Chiffre d’affaires',
-    value: '28 640 €',
+    value: '4,12 M DA',
     detail: '+12,4 %',
     trend: 'up',
     icon: WalletCards,
@@ -102,7 +102,7 @@ export const stockAlerts = [
 export const lots = [
   {
     ref: 'LOT-0924',
-    client: 'Maison Lenoir',
+    client: 'Maison Oran',
     item: 'Chemises Oxford',
     qty: '320 pièces',
     progress: 78,
@@ -111,7 +111,7 @@ export const lots = [
   },
   {
     ref: 'LOT-0927',
-    client: 'Atelier Beaufort',
+    client: 'Atelier Casbah',
     item: 'Pantalons cargo',
     qty: '180 pièces',
     progress: 52,
@@ -120,7 +120,7 @@ export const lots = [
   },
   {
     ref: 'LOT-0931',
-    client: 'Studio Noma',
+    client: 'Studio Constantine',
     item: 'Vestes workwear',
     qty: '120 pièces',
     progress: 31,
@@ -129,7 +129,7 @@ export const lots = [
   },
   {
     ref: 'LOT-0933',
-    client: 'Éditions Rivage',
+    client: 'Éditions Blida',
     item: 'Tabliers brodés',
     qty: '250 pièces',
     progress: 16,
@@ -141,28 +141,28 @@ export const lots = [
 export const workers = [
   {
     initials: 'AB',
-    name: 'Amélie Bernard',
+    name: 'Amel Benali',
     role: 'Piqueuse',
     pieces: 42,
     score: 112,
   },
   {
     initials: 'SL',
-    name: 'Sofia Laurent',
+    name: 'Sofia Belkacem',
     role: 'Monteuse',
     pieces: 38,
     score: 104,
   },
   {
     initials: 'MK',
-    name: 'Moussa Keita',
+    name: 'Moussa Haddad',
     role: 'Coupeur',
     pieces: 35,
     score: 98,
   },
   {
     initials: 'JD',
-    name: 'Julie Diallo',
+    name: 'Khadidja Diallo',
     role: 'Finition',
     pieces: 32,
     score: 94,
@@ -173,7 +173,7 @@ export const activityItems = [
   {
     icon: PackageCheck,
     text: 'Lot LOT-0918 terminé',
-    sub: '480 polos · Maison Lenoir',
+    sub: '480 polos · Maison Oran',
     time: 'Il y a 18 min',
     tone: 'success',
   },
