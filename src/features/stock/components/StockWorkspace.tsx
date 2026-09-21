@@ -118,6 +118,18 @@ export function StockWorkspace({ page }: { page: StockPage }) {
   const { t } = useLanguage();
   const content = pageContent[page];
   const Icon = pageIcons[page];
+  const summary = {
+    overview: [["Stock total", "58 420 unités", "Toutes les références"], ["Valeur estimée", "12,4 M DA", "+4,8 % ce mois"], ["Sous le seuil", "7 matières", "2 urgentes"], ["Mouvements aujourd'hui", "18", "Dernier à 08:01"]],
+    materials: [["Références matières", "248", "Tissus et accessoires"], ["Valeur matières", "8,7 M DA", "Prix de référence"], ["Sous le seuil", "7", "2 urgentes"], ["Fournisseurs actifs", "18", "Ce mois"]],
+    rolls: [["Rouleaux actifs", "86", "Tous fournisseurs"], ["Mètres disponibles", "4 280 m", "Sur les rouleaux"], ["Proches de l'épuisement", "14", "À surveiller"], ["Réceptions récentes", "9", "Depuis 7 jours"]],
+    receipts: [["Réceptions période", "18", "Depuis le 1er sept."], ["Quantité reçue", "3 840 unités", "Toutes matières"], ["Fournisseurs", "12", "Actifs sur la période"], ["Dernière réception", "08:01", "20 sept. 2026"]],
+    issues: [["Sorties période", "42", "Vers la production"], ["Quantité délivrée", "2 680 unités", "Matières consommables"], ["Lots servis", "12", "En production"], ["À confirmer", "3 sorties", "Contrôle requis"]],
+    returns: [["Retours période", "16", "Depuis le 1er sept."], ["Quantité retournée", "184 unités", "Toutes matières"], ["Réutilisables", "142", "77 % du retour"], ["À contrôler", "12", "Décision requise"]],
+    inventory: [["Inventaires ouverts", "2", "À terminer"], ["Références contrôlées", "138", "Ce mois"], ["Écart total", "-18,5 unités", "Avant approbation"], ["À approuver", "1 inventaire", "Responsable requis"]],
+    movements: [["Mouvements période", "384", "Entrées et sorties"], ["Entrées", "142", "Réceptions et retours"], ["Sorties", "226", "Vers la production"], ["Ajustements", "16", "Inventaires et pertes"]],
+    valuation: [["Valeur totale", "12,4 M DA", "Stock disponible"], ["Matière principale", "3,04 M DA", "Jersey coton noir"], ["Part fournisseurs", "18", "Fournisseurs évalués"], ["Variation mensuelle", "+4,8 %", "Vs. août 2026"]],
+    alerts: [["Alertes ouvertes", "7", "2 urgentes"], ["Matières épuisées", "2", "Réapprovisionnement"], ["Sous le seuil", "5", "À surveiller"], ["Rouleaux faibles", "14", "Proches de la fin"]],
+  }[page];
 
   return (
     <PageShell>
@@ -132,7 +144,7 @@ export function StockWorkspace({ page }: { page: StockPage }) {
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          {[["Stock total", "58 420 unités", "Toutes les références"], ["Valeur estimée", "12,4 M DA", "+4,8 % ce mois"], ["Sous le seuil", "7 matières", "2 urgentes"], ["Mouvements aujourd'hui", "18", "Dernier à 08:01"]].map(([label, value, note]) => (
+            {summary.map(([label, value, note]) => (
           <Card key={label} className="border-border/80 shadow-card"><CardContent className="p-4"><p className="text-xs text-muted-foreground">{t(label)}</p><p className="mt-2 font-display text-2xl font-bold tabular-nums text-foreground">{value}</p><p className="mt-1 text-[11px] text-muted-foreground">{t(note)}</p></CardContent></Card>
         ))}
       </div>

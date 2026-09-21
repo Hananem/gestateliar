@@ -181,6 +181,7 @@
   input {
     letter-spacing: 0;
   }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

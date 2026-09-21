@@ -1,9 +1,10 @@
 import {
   ClipboardCheck,
   ClipboardList,
+  Archive,
   Edit3,
+  Eye,
   History,
-  UserRound,
   Users,
   XCircle,
 } from "lucide-react";
@@ -50,6 +51,11 @@ export function TeamWorkspace({ page }: { page: TeamPage }) {
   const { t } = useLanguage();
   const content = pageContent[page];
   const Icon = pageIcons[page];
+  const summary = {
+    workers: [["Ouvriers actifs", "2", "Équipe affichée"], ["Ouvriers archivés", "1", "Historique conservé"], ["Affectations actives", "2", "Sur les lots affichés"], ["Profils à revoir", "0", "Cette page"]],
+    assignments: [["Affectations actives", "2", "Sur les lots affichés"], ["Opérations couvertes", "3", "Opérations assignées"], ["Lots suivis", "3", "En production"], ["À planifier", "1", "Affectation"]],
+    dailyWork: [["Travail enregistré", "3", "Saisies affichées"], ["Travail validé", "2", "67 % des saisies"], ["À valider", "1", "Par le responsable"], ["Modifications tracées", "0", "Cette page"]],
+  }[page];
 
   return (
     <PageShell>
@@ -64,12 +70,12 @@ export function TeamWorkspace({ page }: { page: TeamPage }) {
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          {[["Ouvriers actifs", "24", "Équipe actuelle"], ["Affectations actives", "18", "Sur les lots en cours"], ["Travail à valider", "7", "Saisies du jour"], ["Modifications tracées", "12", "Cette semaine"]].map(([label, value, note]) => <Card key={label} className="border-border/80 shadow-card"><CardContent className="p-4"><p className="text-xs text-muted-foreground">{t(label)}</p><p className="mt-2 font-display text-2xl font-bold tabular-nums text-foreground">{value}</p><p className="mt-1 text-[11px] text-muted-foreground">{t(note)}</p></CardContent></Card>)}
+           {summary.map(([label, value, note]) => <Card key={label} className="border-border/80 shadow-card"><CardContent className="p-4"><p className="text-xs text-muted-foreground">{t(label)}</p><p className="mt-2 font-display text-2xl font-bold tabular-nums text-foreground">{value}</p><p className="mt-1 text-[11px] text-muted-foreground">{t(note)}</p></CardContent></Card>)}
         </div>
 
         <Card className="border-border/80 shadow-card">
           <CardHeader className="flex flex-col gap-3 border-b border-border/70 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"><div><CardTitle>{t(content.title)}</CardTitle><p className="mt-1 text-xs text-muted-foreground">{t("Données actualisées à 08:02")}</p></div><div className="relative w-full sm:w-64"><Input className="h-8 text-xs" placeholder={t("Rechercher")} /></div></CardHeader>
-          <CardContent className="overflow-x-auto p-0"><table className="w-full min-w-[720px] text-left text-sm"><thead className="bg-muted/40 text-xs text-muted-foreground"><tr>{content.columns.map((column) => <th key={column} className="px-5 py-3 font-medium">{t(column)}</th>)}</tr></thead><tbody>{content.rows.map((row) => <tr key={row[0]} className="border-t border-border/70"><td className="px-5 py-3 font-medium text-foreground">{row[0]}</td>{row.slice(1).map((cell, index) => <td key={`${row[0]}-${index}`} className="px-5 py-3 text-muted-foreground">{page === "workers" && index === 0 ? <Badge variant={cell === "Archivé" ? "secondary" : "default"}>{cell}</Badge> : page === "dailyWork" && index === row.length - 2 ? <Badge variant={cell === "Validé" ? "default" : "secondary"}>{cell}</Badge> : page === "workers" && index === 1 ? <span className="inline-flex items-center gap-1 text-xs"><UserRound className="size-3.5" />{cell}</span> : cell}</td>)}</tr>)}</tbody></table></CardContent>
+          <CardContent className="overflow-x-auto p-0"><table className="w-full min-w-[720px] text-left text-sm"><thead className="bg-muted/40 text-xs text-muted-foreground"><tr>{content.columns.map((column) => <th key={column} className={`px-5 py-3 font-medium ${page === "workers" && column === "Actions" ? "text-end" : ""}`}>{t(column)}</th>)}</tr></thead><tbody>{content.rows.map((row) => <tr key={row[0]} className="border-t border-border/70"><td className="px-5 py-3 font-medium text-foreground">{row[0]}</td>{row.slice(1).map((cell, index) => <td key={`${row[0]}-${index}`} className={`px-5 py-3 text-muted-foreground ${page === "workers" && index === 1 ? "text-end" : ""}`}>{page === "workers" && index === 0 ? <Badge variant={cell === "Archivé" ? "secondary" : "default"}>{t(cell)}</Badge> : page === "dailyWork" && index === row.length - 2 ? <Badge variant={cell === "Validé" ? "default" : "secondary"}>{t(cell)}</Badge> : page === "workers" && index === 1 ? <div className="flex items-center justify-end gap-1"><Button variant="ghost" size="icon-sm" title={t("Voir")} aria-label={t("Voir")}><Eye /></Button><Button variant="ghost" size="icon-sm" title={t("Modifier")} aria-label={t("Modifier")}><Edit3 /></Button>{row[1] === "Actif" ? <Button variant="ghost" size="icon-sm" title={t("Archiver")} aria-label={t("Archiver")}><Archive /></Button> : null}</div> : t(cell)}</td>)}</tr>)}</tbody></table></CardContent>
         </Card>
 
         {page === "dailyWork" ? <Card className="border-border/80 bg-muted/20 shadow-none"><CardContent className="flex flex-wrap items-center gap-4 p-4 text-xs text-muted-foreground"><span className="inline-flex items-center gap-1.5"><Edit3 className="size-3.5" />{t("Modification conservée dans l'historique")}</span><span className="inline-flex items-center gap-1.5"><XCircle className="size-3.5" />{t("Annulation avec motif obligatoire")}</span><span className="inline-flex items-center gap-1.5"><History className="size-3.5" />{t("Travail validé par le responsable")}</span></CardContent></Card> : null}

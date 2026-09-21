@@ -84,6 +84,15 @@ export function ProductionWorkspace({ page }: { page: ProductionPage }) {
   const { t } = useLanguage();
   const content = pageContent[page];
   const Icon = pageIcons[page];
+  const summary = {
+    overview: [["Lots actifs", "12", "4 échéances cette semaine"], ["Pièces produites", "184", "Aujourd'hui"], ["Taux d'acceptation", "97,6 %", "+1,2 % ce mois"], ["Rejets à traiter", "10", "6 à corriger"]],
+    articles: [["Articles actifs", "24", "Référentiel"], ["Modèles configurés", "18", "Avec opérations"], ["Consommation définie", "22", "Articles complets"], ["À compléter", "2", "Fiches article"]],
+    operations: [["Opérations actives", "16", "Dans les ateliers"], ["Tarifs définis", "16", "100 % configurés"], ["Articles liés", "24", "Référentiel"], ["À revoir", "2", "Tarifs à confirmer"]],
+    lots: [["Lots actifs", "12", "En production"], ["Pièces planifiées", "620", "Tous les lots"], ["Pièces réalisées", "381", "61 % du plan"], ["Échéances proches", "4", "Cette semaine"]],
+    consumption: [["Lots suivis", "12", "En production"], ["Matières consommées", "2 680 unités", "Sorties liées"], ["Écart moyen", "+1,8 %", "Vs. théorique"], ["Écarts à revoir", "3", "Au-dessus du théorique"]],
+    progress: [["Lots suivis", "12", "Avancement enregistré"], ["Planifié", "620 pièces", "Période active"], ["Accepté", "371 pièces", "97,4 % réalisé"], ["Rejeté", "10 pièces", "À traiter"]],
+    rejects: [["Rejets période", "10 pièces", "Depuis le 1er sept."], ["À corriger", "6", "Retour atelier"], ["Non payés", "3", "Règle appliquée"], ["Payés partiellement", "1", "À documenter"]],
+  }[page];
 
   return (
     <PageShell>
@@ -97,7 +106,7 @@ export function ProductionWorkspace({ page }: { page: ProductionPage }) {
           <Button className="w-fit">{t(content.action)}</Button>
         </div>
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          {[["Lots actifs", "12", "4 échéances cette semaine"], ["Pièces produites", "184", "Aujourd'hui"], ["Taux d'acceptation", "97,6 %", "+1,2 % ce mois"], ["Rejets à traiter", "10", "6 à corriger"]].map(([label, value, note]) => <Card key={label} className="border-border/80 shadow-card"><CardContent className="p-4"><p className="text-xs text-muted-foreground">{t(label)}</p><p className="mt-2 font-display text-2xl font-bold tabular-nums text-foreground">{value}</p><p className="mt-1 text-[11px] text-muted-foreground">{t(note)}</p></CardContent></Card>)}
+          {summary.map(([label, value, note]) => <Card key={label} className="border-border/80 shadow-card"><CardContent className="p-4"><p className="text-xs text-muted-foreground">{t(label)}</p><p className="mt-2 font-display text-2xl font-bold tabular-nums text-foreground">{value}</p><p className="mt-1 text-[11px] text-muted-foreground">{t(note)}</p></CardContent></Card>)}
         </div>
         <Card className="border-border/80 shadow-card">
           <CardHeader className="flex flex-col gap-3 border-b border-border/70 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"><div><CardTitle>{t(content.title)}</CardTitle><p className="mt-1 text-xs text-muted-foreground">{t("Données actualisées à 08:02")}</p></div><div className="relative w-full sm:w-64"><Search className="absolute left-2.5 top-2 size-4 text-muted-foreground" /><Input className="h-8 pl-8 text-xs" placeholder={t("Rechercher")} /></div></CardHeader>
