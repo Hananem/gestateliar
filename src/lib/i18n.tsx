@@ -535,10 +535,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr'
   }, [language])
 
-  const value = useMemo(
+const value = useMemo(
     () => ({
       language,
       setLanguage,
+      dir: language === 'ar' ? 'rtl' : 'ltr', 
       t: (key: string) =>
         Object.prototype.hasOwnProperty.call(translations[language], key)
           ? translations[language][key as keyof typeof translations.fr]

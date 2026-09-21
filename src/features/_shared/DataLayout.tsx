@@ -1,13 +1,51 @@
 import type { DataLayoutProps } from '@/types/shared'
 import { useState } from 'react'
-import { Search } from 'lucide-react'
+import { Search, RefreshCw } from 'lucide-react'
 import { AppShell } from '@/components/layout/AppShell'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { TablePagination } from '@/features/_shared/TablePagination'
 import { useLanguage } from '@/lib/i18n'
+import { cn } from '@/lib/utils'
+
+const STATUS_VALUES = new Set([
+  'Actif',
+  'Active',
+  'Affectée',
+  'Enregistrée',
+  'Clôturée',
+  'En préparation',
+  'À vérifier',
+  'Validé',
+  'Réussie',
+  'Urgente',
+  'À surveiller',
+  'Rouleau faible',
+])
+
+function badgeVariant(cell: string) {
+  if (
+    cell === 'Urgente' ||
+    cell === 'Clôturée' ||
+    cell === 'Épuisé' ||
+    cell === 'Épuisée'
+  )
+    return 'destructive'
+  if (cell === 'À surveiller') return 'warning'
+  if (cell === 'Rouleau faible') return 'info'
+  if (
+    cell === 'Actif' ||
+    cell === 'Active' ||
+    cell === 'Validé' ||
+    cell === 'Réussie' ||
+    cell === 'Affectée' ||
+    cell === 'Enregistrée'
+  )
+    return 'success'
+  return 'secondary'
+}
 
 export function DataLayout({
   content,
@@ -19,120 +57,157 @@ export function DataLayout({
 }: DataLayoutProps) {
   const { t } = useLanguage()
   const [page, setPage] = useState(1)
+  const [query, setQuery] = useState('')
   const pageSize = 10
-  const pageCount = Math.max(1, Math.ceil(content.rows.length / pageSize))
-  const visibleRows = content.rows.slice((page - 1) * pageSize, page * pageSize)
+
+  const filteredRows = query
+    ? content.rows.filter((row) =>
+        row.some((cell) =>
+          cell.toLowerCase().includes(query.toLowerCase()),
+        ),
+      )
+    : content.rows
+
+  const pageCount = Math.max(1, Math.ceil(filteredRows.length / pageSize))
+  const safePage = Math.min(page, pageCount)
+  const visibleRows = filteredRows.slice(
+    (safePage - 1) * pageSize,
+    safePage * pageSize,
+  )
 
   return (
     <AppShell>
-      <div className="space-y-6">
-        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <div className="mb-3 flex size-10 items-center justify-center rounded-lg bg-primary-soft text-primary">
-              <Icon className="size-4.5" />
+      <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
+        {/* ── Header ── */}
+        <header className="flex flex-wrap items-start justify-between gap-4">
+          <div className="flex items-start gap-3.5">
+            {Icon && (
+              <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary">
+                <Icon className="size-5.5" />
+              </div>
+            )}
+            <div>
+              <h1 className="font-display text-2xl font-bold tracking-tight text-foreground">
+                {t(content.title)}
+              </h1>
+              <p className="mt-1 max-w-md text-sm leading-relaxed text-muted-foreground">
+                {t(content.subtitle)}
+              </p>
             </div>
-            <h1 className="font-display text-2xl font-bold tracking-tight text-foreground">
-              {t(content.title)}
-            </h1>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {t(content.subtitle)}
-            </p>
           </div>
-          <Button className="w-fit gap-2">
-            <ActionIcon className="size-4" />
+          <Button variant="default" className="gap-2">
+            {ActionIcon && <ActionIcon className="size-4" />}
             {t(content.action)}
           </Button>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {summary.map(([label, value, note]) => (
-            <Card key={label} className="border-border/80 shadow-card">
-              <CardContent className="p-4">
-                <p className="text-xs text-muted-foreground">{t(label)}</p>
-                <p className="mt-2 font-display text-2xl font-bold tabular-nums text-foreground">
-                  {value}
-                </p>
-                <p className="mt-1 text-[11px] text-muted-foreground">
-                  {t(note)}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        <Card className="overflow-hidden border-border/80 shadow-card">
-          <CardHeader className="flex flex-col gap-4 border-b border-border/70 bg-muted/15 px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+        </header>
+
+        {/* ── Summary cards ── */}
+        {summary && summary.length > 0 && (
+          <div className="mt-7 grid grid-cols-2 gap-3.5 sm:grid-cols-4">
+            {summary.map(([label, value, note]) => (
+              <Card key={label} className="border-border py-0">
+                <CardContent className="flex flex-col gap-2 px-4 py-4">
+                  <p className="text-[13px] font-medium text-muted-foreground">
+                    {t(label)}
+                  </p>
+                  <p className="font-display text-3xl font-bold leading-none tracking-tight text-foreground">
+                    {value}
+                  </p>
+                  <p className="text-xs text-muted-foreground">{t(note)}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
+
+        {/* ── Data table ── */}
+        <Card className="mt-5 overflow-hidden border-border p-0">
+          {/* Table toolbar */}
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
             <div>
-              <CardTitle>{t(content.title)}</CardTitle>
-              <p className="mt-1 text-xs text-muted-foreground">
+              <h2 className="font-display text-base font-semibold text-foreground">
+                {t(content.title)}
+              </h2>
+              <p className="mt-0.5 flex items-center gap-1.5 text-xs text-muted-foreground">
+                <RefreshCw className="size-3" />
                 {t('Données actualisées à 08:02')}
               </p>
             </div>
-            <div className="relative w-full sm:w-64">
-              <Search className="absolute start-2.5 top-2 size-4 text-muted-foreground" />
+            <div className="relative">
+              <Search className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                className="h-8 ps-8 text-xs"
-                placeholder={t('Rechercher')}
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value)
+                  setPage(1)
+                }}
+                placeholder={t('Rechercher…')}
+                className="w-full h-9 ps-9 pe-3 text-sm sm:w-64"
               />
             </div>
-          </CardHeader>
-          <CardContent className="overflow-x-auto p-0">
-            <table className={`w-full ${minWidth} text-start text-sm`}>
-              <thead className="bg-muted/40 text-xs text-muted-foreground">
-                <tr>
+          </div>
+
+          {/* Table body */}
+          <div className="overflow-x-auto">
+            <table className={cn('w-full border-collapse text-sm', minWidth)}>
+              <thead>
+                <tr className="border-b border-border bg-canvas/60">
                   {content.columns.map((column) => (
                     <th
                       key={column}
-                      className="px-5 py-3 font-medium first:ps-5 last:pe-5"
+                      className="px-5 py-3 text-start font-semibold text-muted-foreground"
                     >
                       {t(column)}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border/60">
-                {visibleRows.map((row, rowIndex) => (
-                  <tr
-                    key={row[0]}
-                    className={`transition-colors hover:bg-muted/30 ${
-                      rowIndex % 2 === 1 ? 'bg-muted/10' : ''
-                    }`}
-                  >
-                    <td className="px-5 py-3.5 font-medium text-foreground">
-                      {row[0]}
+              <tbody>
+                {visibleRows.length === 0 ? (
+                  <tr>
+                    <td
+                      colSpan={content.columns.length}
+                      className="px-5 py-12 text-center text-sm text-muted-foreground"
+                    >
+                      Aucun résultat
                     </td>
-                    {row.slice(1).map((cell, index) => (
-                      <td
-                        key={`${row[0]}-${index}`}
-                        className="px-5 py-3.5 tabular-nums text-muted-foreground"
-                      >
-                        {cell.includes('%') ||
-                        [
-                          'Actif',
-                          'Active',
-                          'Affectée',
-                          'Enregistrée',
-                          'Clôturée',
-                          'En préparation',
-                          'À vérifier',
-                          'Validé',
-                          'Réussie',
-                        ].includes(cell) ? (
-                          <Badge variant="secondary">{cell}</Badge>
-                        ) : (
-                          cell
-                        )}
-                      </td>
-                    ))}
                   </tr>
-                ))}
+                ) : (
+                  visibleRows.map((row, rowIndex) => (
+                    <tr
+                      key={rowIndex}
+                      className="border-b border-border/60 transition-colors last:border-0 hover:bg-accent/40"
+                    >
+                      <td className="px-5 py-3.5 font-medium text-foreground">
+                        {row[0]}
+                      </td>
+                      {row.slice(1).map((cell, cellIndex) => (
+                        <td
+                          key={cellIndex}
+                          className="px-5 py-3.5 text-foreground/90"
+                        >
+                          {cell.includes('%') || STATUS_VALUES.has(cell) ? (
+                            <Badge variant={badgeVariant(cell)}>{cell}</Badge>
+                          ) : (
+                            cell
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
-          </CardContent>
+          </div>
+
+          {/* Pagination */}
           <TablePagination
-            page={page}
+            page={safePage}
             pageCount={pageCount}
             onPageChange={setPage}
           />
         </Card>
+
         {children}
       </div>
     </AppShell>

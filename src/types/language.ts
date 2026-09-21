@@ -1,7 +1,7 @@
 export type Language = 'fr' | 'ar'
-
-export type LanguageContextValue = {
+export interface LanguageContextValue {
   language: Language
-  setLanguage: (language: Language) => void
+  setLanguage: (lang: Language) => void
+  dir: 'ltr' | 'rtl'   // ⭐ سطر جديد
   t: (key: string) => string
 }
