@@ -1,10 +1,10 @@
 import { Plus, FolderTree } from 'lucide-react'
+import { Header } from '@/features/_shared/Header'
+import { Cards } from '@/features/_shared/Cards'
 import { DataLayout } from '@/features/_shared/DataLayout'
 
 const content = {
   title: 'Catégories',
-  subtitle: 'Classer les dépenses pour faciliter leur suivi et leurs rapports.',
-  action: 'Ajouter une catégorie',
   columns: [
     'Catégorie',
     'Description',
@@ -46,11 +46,18 @@ const summary = [
 
 export function ExpenseCategories() {
   return (
-    <DataLayout
-      content={content}
-      summary={summary}
-      icon={FolderTree}
-      actionIcon={Plus}
-    />
+    <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
+      <Header
+        title="Catégories"
+        subtitle="Classer les dépenses pour faciliter leur suivi et leurs rapports."
+        action="Ajouter une catégorie"
+        icon={FolderTree}
+        actionIcon={Plus}
+      />
+
+      <Cards summary={summary} />
+
+      <DataLayout content={content} />
+    </div>
   )
 }

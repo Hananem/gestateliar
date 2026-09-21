@@ -1,11 +1,10 @@
 import { PackageCheck } from 'lucide-react'
+import { Header } from '@/features/_shared/Header'
+import { Cards } from '@/features/_shared/Cards'
 import { DataLayout } from '@/features/_shared/DataLayout'
 
 const content = {
   title: 'Rouleaux & lots fournisseurs',
-  subtitle:
-    "Traçabilité de chaque rouleau, de sa réception jusqu'à son utilisation.",
-  action: 'Enregistrer un rouleau',
   columns: ['Rouleau', 'Matière', 'Longueur', 'Fournisseur', 'Réception'],
   rows: [
     [
@@ -31,6 +30,7 @@ const content = {
     ],
   ],
 }
+
 const summary = [
   ['Rouleaux actifs', '86', 'Tous fournisseurs'],
   ['Mètres disponibles', '4 280 m', 'Sur les rouleaux'],
@@ -40,11 +40,18 @@ const summary = [
 
 export function StockRolls() {
   return (
-    <DataLayout
-      content={content}
-      summary={summary}
-      icon={PackageCheck}
-      actionIcon={PackageCheck}
-    />
+    <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
+      <Header
+        title="Rouleaux & lots fournisseurs"
+        subtitle="Traçabilité de chaque rouleau, de sa réception jusqu'à son utilisation."
+        action="Enregistrer un rouleau"
+        icon={PackageCheck}
+        actionIcon={PackageCheck}
+      />
+
+      <Cards summary={summary} />
+
+      <DataLayout content={content} minWidth="min-w-[680px]" />
+    </div>
   )
 }

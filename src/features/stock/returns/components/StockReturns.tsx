@@ -1,11 +1,10 @@
 import { RotateCcw } from 'lucide-react'
+import { Header } from '@/features/_shared/Header'
+import { Cards } from '@/features/_shared/Cards'
 import { DataLayout } from '@/features/_shared/DataLayout'
 
 const content = {
   title: "Retours d'atelier",
-  subtitle:
-    "Réconcilier les matières retournées avec la sortie d'origine et leur état.",
-  action: 'Enregistrer un retour',
   columns: ['Retour', "Sortie d'origine", 'Matière', 'Quantité', 'État'],
   rows: [
     [
@@ -31,6 +30,7 @@ const content = {
     ],
   ],
 }
+
 const summary = [
   ['Retours période', '16', 'Depuis le 1er sept.'],
   ['Quantité retournée', '184 unités', 'Toutes matières'],
@@ -40,11 +40,18 @@ const summary = [
 
 export function StockReturns() {
   return (
-    <DataLayout
-      content={content}
-      summary={summary}
-      icon={RotateCcw}
-      actionIcon={RotateCcw}
-    />
+    <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
+      <Header
+        title="Retours d'atelier"
+        subtitle="Réconcilier les matières retournées avec la sortie d'origine et leur état."
+        action="Enregistrer un retour"
+        icon={RotateCcw}
+        actionIcon={RotateCcw}
+      />
+
+      <Cards summary={summary} />
+
+      <DataLayout content={content} minWidth="min-w-[680px]" />
+    </div>
   )
 }

@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 
 import type { PayrollPage, PayrollPageData } from '@/types/payroll'
+import type { SummaryItem } from '@/types/shared'
 
 export const pages: Record<PayrollPage, PayrollPageData> = {
   overview: {
@@ -310,7 +311,7 @@ export const pageIcons: Record<PayrollPage, typeof Banknote> = {
   payslip: FileCheck2,
 }
 
-export const summary: Record<PayrollPage, string[][]> = {
+export const summary: Record<PayrollPage, SummaryItem[]> = {
   overview: [
     ['Ouvriers à calculer', '24', 'Période active'],
     ['Brut total', '1,84 M DA', 'Sept. 2026'],

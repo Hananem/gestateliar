@@ -1,14 +1,25 @@
 import { Calculator } from 'lucide-react'
+import { Header } from '@/features/_shared/Header'
+import { Cards } from '@/features/_shared/Cards'
 import { DataLayout } from '@/features/_shared/DataLayout'
 import { pages, pageIcons, summary } from '@/features/payroll/data'
 
 export function PayrollOverview() {
+  const content = pages.overview
+
   return (
-    <DataLayout
-      content={pages.overview}
-      summary={summary.overview}
-      icon={pageIcons.overview}
-      actionIcon={Calculator}
-    />
+    <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
+      <Header
+        title={content.title}
+        subtitle={content.subtitle}
+        action={content.action}
+        icon={pageIcons.overview}
+        actionIcon={Calculator}
+      />
+
+      <Cards summary={summary.overview} />
+
+      <DataLayout content={content} />
+    </div>
   )
 }

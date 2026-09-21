@@ -1,11 +1,10 @@
 import { ArrowUpFromLine } from 'lucide-react'
+import { Header } from '@/features/_shared/Header'
+import { Cards } from '@/features/_shared/Cards'
 import { DataLayout } from '@/features/_shared/DataLayout'
 
 const content = {
   title: 'Sorties vers production',
-  subtitle:
-    'Préparer et contrôler les matières affectées aux lots de production.',
-  action: 'Enregistrer une sortie',
   columns: [
     'Lot de production',
     'Matière / rouleau',
@@ -31,6 +30,7 @@ const content = {
     ],
   ],
 }
+
 const summary = [
   ['Sorties période', '42', 'Vers la production'],
   ['Quantité délivrée', '2 680 unités', 'Matières consommables'],
@@ -40,11 +40,18 @@ const summary = [
 
 export function StockIssues() {
   return (
-    <DataLayout
-      content={content}
-      summary={summary}
-      icon={ArrowUpFromLine}
-      actionIcon={ArrowUpFromLine}
-    />
+    <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
+      <Header
+        title="Sorties vers production"
+        subtitle="Préparer et contrôler les matières affectées aux lots de production."
+        action="Enregistrer une sortie"
+        icon={ArrowUpFromLine}
+        actionIcon={ArrowUpFromLine}
+      />
+
+      <Cards summary={summary} />
+
+      <DataLayout content={content} />
+    </div>
   )
 }

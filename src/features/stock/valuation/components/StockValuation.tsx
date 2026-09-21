@@ -1,11 +1,10 @@
 import { Download, PackageCheck } from 'lucide-react'
+import { Header } from '@/features/_shared/Header'
+import { Cards } from '@/features/_shared/Cards'
 import { DataLayout } from '@/features/_shared/DataLayout'
 
 const content = {
   title: 'Valorisation du stock',
-  subtitle:
-    "Estimation de la valeur du stock selon le prix d'achat de référence.",
-  action: 'Exporter la valorisation',
   columns: [
     'Matière',
     'Quantité',
@@ -25,6 +24,7 @@ const content = {
     ],
   ],
 }
+
 const summary = [
   ['Valeur totale', '12,4 M DA', 'Stock disponible'],
   ['Matière principale', '3,04 M DA', 'Jersey coton noir'],
@@ -34,11 +34,18 @@ const summary = [
 
 export function StockValuation() {
   return (
-    <DataLayout
-      content={content}
-      summary={summary}
-      icon={PackageCheck}
-      actionIcon={Download}
-    />
+    <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
+      <Header
+        title="Valorisation du stock"
+        subtitle="Estimation de la valeur du stock selon le prix d'achat de référence."
+        action="Exporter la valorisation"
+        icon={PackageCheck}
+        actionIcon={Download}
+      />
+
+      <Cards summary={summary} />
+
+      <DataLayout content={content} minWidth="min-w-[680px]" />
+    </div>
   )
 }

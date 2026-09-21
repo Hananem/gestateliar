@@ -1,10 +1,10 @@
 import { CalendarClock, Plus } from 'lucide-react'
+import { Header } from '@/features/_shared/Header'
+import { Cards } from '@/features/_shared/Cards'
 import { DataLayout } from '@/features/_shared/DataLayout'
 
 const content = {
   title: 'Dépenses récurrentes',
-  subtitle: "Programmer et suivre les dépenses périodiques de l'atelier.",
-  action: 'Ajouter une dépense récurrente',
   columns: [
     'Libellé',
     'Catégorie',
@@ -50,11 +50,18 @@ const summary = [
 
 export function RecurringExpenses() {
   return (
-    <DataLayout
-      content={content}
-      summary={summary}
-      icon={CalendarClock}
-      actionIcon={Plus}
-    />
+    <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
+      <Header
+        title="Dépenses récurrentes"
+        subtitle="Programmer et suivre les dépenses périodiques de l'atelier."
+        action="Ajouter une dépense récurrente"
+        icon={CalendarClock}
+        actionIcon={Plus}
+      />
+
+      <Cards summary={summary} />
+
+      <DataLayout content={content} />
+    </div>
   )
 }

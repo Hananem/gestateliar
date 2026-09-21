@@ -1,20 +1,20 @@
-import type { ComponentType, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 export type PageContent = {
   title: string
-  subtitle: string
-  action: string
   columns: string[]
   rows: string[][]
+  images?: Record<string, string>
 }
 
-export type SummaryItem = [label: string, value: string, note: string]
+export type SummaryItem = [
+  label: string,
+  value: string,
+  note: string,
+]
 
 export type DataLayoutProps = {
   content: PageContent
-  summary: SummaryItem[]
-  icon: ComponentType<{ className?: string }>
-  actionIcon: ComponentType<{ className?: string }>
   minWidth?: string
   children?: ReactNode
 }

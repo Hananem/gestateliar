@@ -1,7 +1,9 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
+
 import { TooltipProvider } from '@/components/ui/tooltip'
+import { AppShell } from '@/components/layout/AppShell'
 import { LanguageProvider } from '@/lib/i18n'
 
 import appCss from '../styles.css?url'
@@ -40,7 +42,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body>
         <TooltipProvider>
           <LanguageProvider>
-            {children}
+            <AppShell>
+              {children}
+            </AppShell>
 
             <TanStackDevtools
               config={{
@@ -54,9 +58,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               ]}
             />
           </LanguageProvider>
-
-          <Scripts />
         </TooltipProvider>
+
+        <Scripts />
       </body>
     </html>
   )

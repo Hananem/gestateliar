@@ -3,7 +3,7 @@
 @import 'tw-animate-css';
 @import '@fontsource-variable/dm-sans';
 @import '@fontsource-variable/manrope';
-@import '@fontsource-variable/noto-sans-arabic';
+@import '@fontsource-variable/cairo';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -134,10 +134,9 @@
 }
 
 html[lang='ar'] {
-  --font-family-sans: 'Noto Sans Arabic', sans-serif;
-  --font-family-display: 'Noto Sans Arabic', sans-serif;
+  --font-family-sans: 'Cairo', sans-serif;
+  --font-family-display: 'Cairo', sans-serif;
 }
-
 .dark {
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);

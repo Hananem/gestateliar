@@ -5,19 +5,14 @@ import {
   PackageCheck,
   Plus,
   Scissors,
-  Search,
   Shirt,
   TriangleAlert,
 } from 'lucide-react'
-import { AppShell } from '@/components/layout/AppShell'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { useLanguage } from '@/lib/i18n'
+import { Header } from '@/features/_shared/Header'
+import { Cards } from '@/features/_shared/Cards'
+import { DataLayout } from '@/features/_shared/DataLayout'
 import type { ProductionPage, ProductionPageData } from '@/types/production'
-import { useState } from 'react'
-import { TablePagination } from '@/features/_shared/TablePagination'
+import type { SummaryItem } from '@/types/shared'
 
 const pageContent: Record<ProductionPage, ProductionPageData> = {
   overview: {
@@ -221,168 +216,67 @@ const pageIcons: Record<ProductionPage, typeof Factory> = {
   rejects: TriangleAlert,
 }
 
+const summaries: Record<ProductionPage, SummaryItem[]> = {
+  overview: [
+    ['Lots actifs', '12', '4 échéances cette semaine'],
+    ['Pièces produites', '184', "Aujourd'hui"],
+    ["Taux d'acceptation", '97,6 %', '+1,2 % ce mois'],
+    ['Rejets à traiter', '10', '6 à corriger'],
+  ],
+  articles: [
+    ['Articles actifs', '24', 'Référentiel'],
+    ['Modèles configurés', '18', 'Avec opérations'],
+    ['Consommation définie', '22', 'Articles complets'],
+    ['À compléter', '2', 'Fiches article'],
+  ],
+  operations: [
+    ['Opérations actives', '16', 'Dans les ateliers'],
+    ['Tarifs définis', '16', '100 % configurés'],
+    ['Articles liés', '24', 'Référentiel'],
+    ['À revoir', '2', 'Tarifs à confirmer'],
+  ],
+  lots: [
+    ['Lots actifs', '12', 'En production'],
+    ['Pièces planifiées', '620', 'Tous les lots'],
+    ['Pièces réalisées', '381', '61 % du plan'],
+    ['Échéances proches', '4', 'Cette semaine'],
+  ],
+  consumption: [
+    ['Lots suivis', '12', 'En production'],
+    ['Matières consommées', '2 680 unités', 'Sorties liées'],
+    ['Écart moyen', '+1,8 %', 'Vs. théorique'],
+    ['Écarts à revoir', '3', 'Au-dessus du théorique'],
+  ],
+  progress: [
+    ['Lots suivis', '12', 'Avancement enregistré'],
+    ['Planifié', '620 pièces', 'Période active'],
+    ['Accepté', '371 pièces', '97,4 % réalisé'],
+    ['Rejeté', '10 pièces', 'À traiter'],
+  ],
+  rejects: [
+    ['Rejets période', '10 pièces', 'Depuis le 1er sept.'],
+    ['À corriger', '6', 'Retour atelier'],
+    ['Non payés', '3', 'Règle appliquée'],
+    ['Payés partiellement', '1', 'À documenter'],
+  ],
+}
+
 export function ProductionView({ page }: { page: ProductionPage }) {
-  const { t } = useLanguage()
-  const [pageNumber, setPageNumber] = useState(1)
   const content = pageContent[page]
-  const Icon = pageIcons[page]
-  const ActionIcon = {
-    overview: Plus,
-    articles: Plus,
-    operations: Plus,
-    lots: Plus,
-    consumption: Plus,
-    progress: Plus,
-    rejects: Plus,
-  }[page]
-  const pageCount = Math.max(1, Math.ceil(content.rows.length / 10))
-  const visibleRows = content.rows.slice((pageNumber - 1) * 10, pageNumber * 10)
-  const summary = {
-    overview: [
-      ['Lots actifs', '12', '4 échéances cette semaine'],
-      ['Pièces produites', '184', "Aujourd'hui"],
-      ["Taux d'acceptation", '97,6 %', '+1,2 % ce mois'],
-      ['Rejets à traiter', '10', '6 à corriger'],
-    ],
-    articles: [
-      ['Articles actifs', '24', 'Référentiel'],
-      ['Modèles configurés', '18', 'Avec opérations'],
-      ['Consommation définie', '22', 'Articles complets'],
-      ['À compléter', '2', 'Fiches article'],
-    ],
-    operations: [
-      ['Opérations actives', '16', 'Dans les ateliers'],
-      ['Tarifs définis', '16', '100 % configurés'],
-      ['Articles liés', '24', 'Référentiel'],
-      ['À revoir', '2', 'Tarifs à confirmer'],
-    ],
-    lots: [
-      ['Lots actifs', '12', 'En production'],
-      ['Pièces planifiées', '620', 'Tous les lots'],
-      ['Pièces réalisées', '381', '61 % du plan'],
-      ['Échéances proches', '4', 'Cette semaine'],
-    ],
-    consumption: [
-      ['Lots suivis', '12', 'En production'],
-      ['Matières consommées', '2 680 unités', 'Sorties liées'],
-      ['Écart moyen', '+1,8 %', 'Vs. théorique'],
-      ['Écarts à revoir', '3', 'Au-dessus du théorique'],
-    ],
-    progress: [
-      ['Lots suivis', '12', 'Avancement enregistré'],
-      ['Planifié', '620 pièces', 'Période active'],
-      ['Accepté', '371 pièces', '97,4 % réalisé'],
-      ['Rejeté', '10 pièces', 'À traiter'],
-    ],
-    rejects: [
-      ['Rejets période', '10 pièces', 'Depuis le 1er sept.'],
-      ['À corriger', '6', 'Retour atelier'],
-      ['Non payés', '3', 'Règle appliquée'],
-      ['Payés partiellement', '1', 'À documenter'],
-    ],
-  }[page]
 
   return (
-    <AppShell>
-      <div className="space-y-5">
-        <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
-          <div>
-            <div className="mb-2 flex size-9 items-center justify-center rounded-md bg-primary-soft text-primary">
-              <Icon className="size-4.5" />
-            </div>
-            <h1 className="font-display text-2xl font-bold tracking-tight text-foreground">
-              {t(content.title)}
-            </h1>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {t(content.subtitle)}
-            </p>
-          </div>
-          <Button className="w-fit gap-2">
-            <ActionIcon className="size-4" />
-            {t(content.action)}
-          </Button>
-        </div>
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          {summary.map(([label, value, note]) => (
-            <Card key={label} className="border-border/80 shadow-card">
-              <CardContent className="p-4">
-                <p className="text-xs text-muted-foreground">{t(label)}</p>
-                <p className="mt-2 font-display text-2xl font-bold tabular-nums text-foreground">
-                  {value}
-                </p>
-                <p className="mt-1 text-[11px] text-muted-foreground">
-                  {t(note)}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        <Card className="border-border/80 shadow-card">
-          <CardHeader className="flex flex-col gap-3 border-b border-border/70 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <CardTitle>{t(content.title)}</CardTitle>
-              <p className="mt-1 text-xs text-muted-foreground">
-                {t('Données actualisées à 08:02')}
-              </p>
-            </div>
-            <div className="relative w-full sm:w-64">
-              <Search className="absolute left-2.5 top-2 size-4 text-muted-foreground" />
-              <Input
-                className="h-8 pl-8 text-xs"
-                placeholder={t('Rechercher')}
-              />
-            </div>
-          </CardHeader>
-          <CardContent className="overflow-x-auto p-0">
-            <table className="w-full min-w-[760px] text-left text-sm">
-              <thead className="bg-muted/40 text-xs text-muted-foreground">
-                <tr>
-                  {content.columns.map((column) => (
-                    <th key={column} className="px-5 py-3 font-medium">
-                      {t(column)}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {visibleRows.map((row) => (
-                  <tr key={row[0]} className="border-t border-border/70">
-                    <td className="px-5 py-3 font-medium text-foreground">
-                      {row[0]}
-                    </td>
-                    {row.slice(1).map((cell, index) => (
-                      <td
-                        key={`${row[0]}-${index}`}
-                        className="px-5 py-3 text-muted-foreground"
-                      >
-                        {cell.includes('%') ||
-                        cell === 'À corriger' ||
-                        cell === 'Non payée' ||
-                        cell === 'Payée partiellement' ? (
-                          <Badge
-                            variant={
-                              cell === 'Non payée' ? 'destructive' : 'secondary'
-                            }
-                          >
-                            {cell}
-                          </Badge>
-                        ) : (
-                          cell
-                        )}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </CardContent>
-          <TablePagination
-            page={pageNumber}
-            pageCount={pageCount}
-            onPageChange={setPageNumber}
-          />
-        </Card>
-      </div>
-    </AppShell>
+    <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
+      <Header
+        title={content.title}
+        subtitle={content.subtitle}
+        action={content.action}
+        icon={pageIcons[page]}
+        actionIcon={Plus}
+      />
+
+      <Cards summary={summaries[page]} />
+
+      <DataLayout content={content} />
+    </div>
   )
 }
