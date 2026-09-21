@@ -1,1 +1,3 @@
-export function TeamOverview() { return null; }
+export function TeamOverview() {
+  return null
+}

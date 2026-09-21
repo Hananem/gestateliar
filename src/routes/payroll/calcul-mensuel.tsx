@@ -1,8 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { PayrollWorkspace } from "@/features/payroll/components/PayrollWorkspace";
+import { createFileRoute } from '@tanstack/react-router'
+import { PayrollWorkspace } from '@/features/payroll/components/PayrollWorkspace'
 
 function CalculMensuelPage() {
-  return <PayrollWorkspace page="monthly" />;
+  return <PayrollWorkspace page="monthly" />
 }
 
-export const Route = createFileRoute("/payroll/calcul-mensuel")({ component: CalculMensuelPage });
+export const Route = createFileRoute('/payroll/calcul-mensuel')({
+  component: CalculMensuelPage,
+})

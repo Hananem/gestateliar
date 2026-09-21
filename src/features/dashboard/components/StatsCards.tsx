@@ -43,7 +43,9 @@ export function StatsCards() {
               <p className="font-display text-2xl font-bold tabular-nums text-foreground">
                 {stat.value}
               </p>
-              <p className="text-[10px] text-muted-foreground">{t(stat.note)}</p>
+              <p className="text-[10px] text-muted-foreground">
+                {t(stat.note)}
+              </p>
             </div>
           </CardContent>
         </Card>

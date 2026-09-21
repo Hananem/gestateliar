@@ -1,1 +1,3 @@
-export function StockOverview() { return null; }
+export function StockOverview() {
+  return null
+}

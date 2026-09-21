@@ -1,0 +1,378 @@
+import {
+  Banknote,
+  Calculator,
+  CheckCircle2,
+  ClipboardList,
+  FileCheck2,
+  LockKeyhole,
+  Settings2,
+} from 'lucide-react'
+
+type PayrollPageData = {
+  title: string
+  subtitle: string
+  action: string
+  columns: string[]
+  rows: string[][]
+}
+
+export type PayrollPage =
+  | 'overview'
+  | 'rates'
+  | 'advances'
+  | 'bonuses'
+  | 'deductions'
+  | 'monthly'
+  | 'closures'
+  | 'payslip'
+
+export const pages: Record<PayrollPage, PayrollPageData> = {
+  overview: {
+    title: 'Paie',
+    subtitle:
+      'Préparer, contrôler et suivre les rémunérations mensuelles des ouvriers.',
+    action: 'Préparer la période',
+    columns: [
+      'Ouvrier',
+      'Période',
+      'Brut',
+      'Avances',
+      'Primes',
+      'Retenues',
+      'Net dû',
+      'État',
+    ],
+    rows: [
+      [
+        'Yacine Benali',
+        'Sept. 2026',
+        '86 400 DA',
+        '10 000 DA',
+        '5 000 DA',
+        '0 DA',
+        '81 400 DA',
+        'En préparation',
+      ],
+      [
+        'Nadia Khelifi',
+        'Sept. 2026',
+        '72 000 DA',
+        '8 000 DA',
+        '3 500 DA',
+        '2 000 DA',
+        '65 500 DA',
+        'À vérifier',
+      ],
+      [
+        'Karim Amrani',
+        'Sept. 2026',
+        '68 500 DA',
+        '0 DA',
+        '2 500 DA',
+        '1 500 DA',
+        '69 500 DA',
+        'En préparation',
+      ],
+    ],
+  },
+  rates: {
+    title: 'Barèmes',
+    subtitle: 'Gérer les tarifs selon le mode de rémunération enregistré.',
+    action: 'Ajouter un barème',
+    columns: ['Ouvrier', 'Mode de paiement', 'Tarif', 'Période', 'Statut'],
+    rows: [
+      [
+        'Yacine Benali',
+        'À la pièce',
+        '350 DA / pièce acceptée',
+        'Sept. 2026',
+        'Actif',
+      ],
+      [
+        'Nadia Khelifi',
+        'À la journée',
+        '2 800 DA / jour',
+        'Sept. 2026',
+        'Actif',
+      ],
+      [
+        'Karim Amrani',
+        'Salaire mensuel fixe',
+        '68 500 DA / mois',
+        'Sept. 2026',
+        'Actif',
+      ],
+    ],
+  },
+  advances: {
+    title: 'Avances',
+    subtitle:
+      'Enregistrer les avances et la période de paie sur laquelle elles seront déduites.',
+    action: 'Enregistrer une avance',
+    columns: [
+      'Ouvrier',
+      'Montant',
+      'Date',
+      'Motif',
+      'Mois de déduction',
+      'État',
+    ],
+    rows: [
+      [
+        'Yacine Benali',
+        '10 000 DA',
+        '10 sept. 2026',
+        'Avance exceptionnelle',
+        'Sept. 2026',
+        'À déduire',
+      ],
+      [
+        'Nadia Khelifi',
+        '8 000 DA',
+        '05 sept. 2026',
+        'Besoin personnel',
+        'Sept. 2026',
+        'À déduire',
+      ],
+      [
+        'Sofia Belkacem',
+        '6 000 DA',
+        '28 août 2026',
+        'Avance sur salaire',
+        'Sept. 2026',
+        'Déduite',
+      ],
+    ],
+  },
+  bonuses: {
+    title: 'Primes',
+    subtitle:
+      'Enregistrer les primes par ouvrier et par période avec leur motif et leur créateur.',
+    action: 'Enregistrer une prime',
+    columns: ['Ouvrier', 'Type', 'Montant', 'Date', 'Motif', 'Créée par'],
+    rows: [
+      [
+        'Yacine Benali',
+        'Rendement',
+        '5 000 DA',
+        '20 sept. 2026',
+        'Objectif du lot atteint',
+        'Fatima Benali',
+      ],
+      [
+        'Nadia Khelifi',
+        'Qualité',
+        '3 500 DA',
+        '20 sept. 2026',
+        'Taux de conformité',
+        'Fatima Benali',
+      ],
+      [
+        'Karim Amrani',
+        'Ponctualité',
+        '2 500 DA',
+        '19 sept. 2026',
+        'Présence sur la période',
+        'Nadia Khelifi',
+      ],
+    ],
+  },
+  deductions: {
+    title: 'Retenues',
+    subtitle:
+      'Enregistrer les retenues appliquées au salaire avec leur motif et leur créateur.',
+    action: 'Enregistrer une retenue',
+    columns: ['Ouvrier', 'Type', 'Montant', 'Date', 'Motif', 'Créée par'],
+    rows: [
+      [
+        'Nadia Khelifi',
+        'Correction',
+        '2 000 DA',
+        '20 sept. 2026',
+        'Régularisation validée',
+        'Fatima Benali',
+      ],
+      [
+        'Karim Amrani',
+        'Absence',
+        '1 500 DA',
+        '18 sept. 2026',
+        'Journée non validée',
+        'Fatima Benali',
+      ],
+      [
+        'Yacine Benali',
+        'Aucune',
+        '0 DA',
+        '20 sept. 2026',
+        'Aucune retenue enregistrée',
+        'Fatima Benali',
+      ],
+    ],
+  },
+  monthly: {
+    title: 'Calcul mensuel',
+    subtitle:
+      'Réviser le détail de chaque calcul avant la clôture de la période.',
+    action: 'Calculer la période',
+    columns: [
+      'Ouvrier',
+      'Mode',
+      'Brut',
+      'Primes / régularisations',
+      'Avances',
+      'Retenues',
+      'Net dû',
+    ],
+    rows: [
+      [
+        'Yacine Benali',
+        'À la pièce',
+        '86 400 DA',
+        '+5 000 DA',
+        '-10 000 DA',
+        '-0 DA',
+        '81 400 DA',
+      ],
+      [
+        'Nadia Khelifi',
+        'À la journée',
+        '72 000 DA',
+        '+3 500 DA',
+        '-8 000 DA',
+        '-2 000 DA',
+        '65 500 DA',
+      ],
+      [
+        'Karim Amrani',
+        'Salaire fixe',
+        '68 500 DA',
+        '+2 500 DA',
+        '-0 DA',
+        '-1 500 DA',
+        '69 500 DA',
+      ],
+    ],
+  },
+  closures: {
+    title: 'Clôtures',
+    subtitle:
+      'Fermer une période et conserver une version fixe des calculs de paie.',
+    action: 'Clôturer septembre',
+    columns: [
+      'Période',
+      'Brut total',
+      'Net total',
+      'Salariés',
+      'Clôturée le',
+      'État',
+    ],
+    rows: [
+      [
+        'Septembre 2026',
+        '1 842 500 DA',
+        '1 761 300 DA',
+        '24',
+        '-',
+        'En préparation',
+      ],
+      [
+        'Août 2026',
+        '1 798 000 DA',
+        '1 704 600 DA',
+        '23',
+        '31 août 2026',
+        'Clôturée',
+      ],
+      [
+        'Juillet 2026',
+        '1 665 400 DA',
+        '1 586 200 DA',
+        '22',
+        '31 juil. 2026',
+        'Clôturée',
+      ],
+    ],
+  },
+  payslip: {
+    title: 'Fiche de paie',
+    subtitle:
+      "Consulter et imprimer le relevé interne détaillé d'un ouvrier autorisé.",
+    action: 'Imprimer / PDF',
+    columns: ['Rubrique', 'Montant', 'Détail'],
+    rows: [
+      ['Ouvrier', 'Yacine Benali', 'Septembre 2026 · À la pièce'],
+      [
+        'Agréments bruts',
+        '86 400 DA',
+        'Quantités acceptées × tarif enregistré',
+      ],
+      ['Primes et régularisations', '+5 000 DA', 'Rendement'],
+      ['Avances', '-10 000 DA', 'Avance du 10 sept. 2026'],
+      ['Retenues', '-0 DA', 'Aucune'],
+      ['Net dû', '81 400 DA', 'Fiche accessible aux utilisateurs autorisés'],
+    ],
+  },
+}
+
+export const pageIcons: Record<PayrollPage, typeof Banknote> = {
+  overview: Banknote,
+  rates: Settings2,
+  advances: ClipboardList,
+  bonuses: CheckCircle2,
+  deductions: FileCheck2,
+  monthly: Calculator,
+  closures: LockKeyhole,
+  payslip: FileCheck2,
+}
+
+export const summary: Record<PayrollPage, string[][]> = {
+  overview: [
+    ['Ouvriers à calculer', '24', 'Période active'],
+    ['Brut total', '1,84 M DA', 'Sept. 2026'],
+    ['Net à payer', '1,76 M DA', 'Après déductions'],
+    ['À contrôler', '7 fiches', 'Avant clôture'],
+  ],
+  rates: [
+    ['Barèmes actifs', '24', 'Ouvriers concernés'],
+    ['À la pièce', '12', 'Tarifs enregistrés'],
+    ['À la journée', '8', 'Tarifs enregistrés'],
+    ['Salaire fixe', '4', 'Tarifs enregistrés'],
+  ],
+  advances: [
+    ['Avances période', '18', 'Sept. 2026'],
+    ['Montant à déduire', '124 000 DA', 'Période active'],
+    ['Déjà déduites', '86 000 DA', 'Calcul mensuel'],
+    ['À vérifier', '2', 'Enregistrements'],
+  ],
+  bonuses: [
+    ['Primes période', '16', 'Sept. 2026'],
+    ['Montant total', '86 000 DA', 'Période active'],
+    ['Rendement', '9', 'Primes enregistrées'],
+    ['Qualité', '5', 'Primes enregistrées'],
+  ],
+  deductions: [
+    ['Retenues période', '9', 'Sept. 2026'],
+    ['Montant total', '43 200 DA', 'Période active'],
+    ['Corrections', '4', 'Retenues enregistrées'],
+    ['À vérifier', '1', 'Enregistrement'],
+  ],
+  monthly: [
+    ['Fiches calculées', '24', 'Sept. 2026'],
+    ['Brut calculé', '1,84 M DA', 'Période active'],
+    ['Net calculé', '1,76 M DA', 'Après déductions'],
+    ['À réviser', '7 fiches', 'Avant clôture'],
+  ],
+  closures: [
+    ['Périodes ouvertes', '1', 'Sept. 2026'],
+    ['Périodes clôturées', '2', 'Juillet - août'],
+    ['Dernier net clôturé', '1,70 M DA', 'Août 2026'],
+    ['Corrections tracées', '3', 'Après clôture'],
+  ],
+  payslip: [
+    ['Ouvrier sélectionné', 'Yacine Benali', 'Sept. 2026'],
+    ['Rémunération brute', '86 400 DA', 'Quantités acceptées'],
+    ['Déductions', '10 000 DA', 'Avance'],
+    ['Net dû', '81 400 DA', 'Fiche prête'],
+  ],
+}

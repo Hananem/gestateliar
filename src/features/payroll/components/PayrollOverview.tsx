@@ -1,1 +1,3 @@
-export function PayrollOverview() { return null; }
+export function PayrollOverview() {
+  return null
+}
