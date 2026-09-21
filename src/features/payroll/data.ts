@@ -8,23 +8,7 @@ import {
   Settings2,
 } from 'lucide-react'
 
-type PayrollPageData = {
-  title: string
-  subtitle: string
-  action: string
-  columns: string[]
-  rows: string[][]
-}
-
-export type PayrollPage =
-  | 'overview'
-  | 'rates'
-  | 'advances'
-  | 'bonuses'
-  | 'deductions'
-  | 'monthly'
-  | 'closures'
-  | 'payslip'
+import type { PayrollPage, PayrollPageData } from '@/types/payroll'
 
 export const pages: Record<PayrollPage, PayrollPageData> = {
   overview: {

@@ -17,15 +17,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { TablePagination } from '@/features/_shared/TablePagination'
 import { useLanguage } from '@/lib/i18n'
-
-type AdminPage = 'users' | 'roles' | 'settings' | 'audit'
-type AdminData = {
-  title: string
-  subtitle: string
-  action: string
-  columns: string[]
-  rows: string[][]
-}
+import type { AdminData, AdminPage } from '@/types/admin'
 
 export const pages: Record<AdminPage, AdminData> = {
   users: {

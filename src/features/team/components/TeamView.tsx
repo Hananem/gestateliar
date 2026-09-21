@@ -15,21 +15,11 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { useLanguage } from '@/lib/i18n'
+import type { TeamPage, TeamPageData } from '@/types/team'
 import { useState } from 'react'
 import { TablePagination } from '@/features/_shared/TablePagination'
 
-type TeamPage = 'workers' | 'assignments' | 'dailyWork'
-
-const pageContent: Record<
-  TeamPage,
-  {
-    title: string
-    subtitle: string
-    action: string
-    columns: string[]
-    rows: string[][]
-  }
-> = {
+const pageContent: Record<TeamPage, TeamPageData> = {
   workers: {
     title: 'Ouvriers',
     subtitle:

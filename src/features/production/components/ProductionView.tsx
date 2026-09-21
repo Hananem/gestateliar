@@ -15,28 +15,11 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { useLanguage } from '@/lib/i18n'
+import type { ProductionPage, ProductionPageData } from '@/types/production'
 import { useState } from 'react'
 import { TablePagination } from '@/features/_shared/TablePagination'
 
-type ProductionPage =
-  | 'overview'
-  | 'articles'
-  | 'operations'
-  | 'lots'
-  | 'consumption'
-  | 'progress'
-  | 'rejects'
-
-const pageContent: Record<
-  ProductionPage,
-  {
-    title: string
-    subtitle: string
-    action: string
-    columns: string[]
-    rows: string[][]
-  }
-> = {
+const pageContent: Record<ProductionPage, ProductionPageData> = {
   overview: {
     title: 'Production',
     subtitle: 'Pilotage des articles, des lots et des étapes de fabrication.',

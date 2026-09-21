@@ -1,12 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-
-export type Language = 'fr' | 'ar'
-
-type LanguageContextValue = {
-  language: Language
-  setLanguage: (language: Language) => void
-  t: (key: string) => string
-}
+import type { Language, LanguageContextValue } from '@/types/language'
 
 const translations = {
   fr: {

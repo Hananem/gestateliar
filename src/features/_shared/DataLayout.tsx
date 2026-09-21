@@ -1,4 +1,4 @@
-import type { ComponentType, ReactNode } from 'react'
+import type { DataLayoutProps } from '@/types/shared'
 import { useState } from 'react'
 import { Search } from 'lucide-react'
 import { AppShell } from '@/components/layout/AppShell'
@@ -8,25 +8,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { TablePagination } from '@/features/_shared/TablePagination'
 import { useLanguage } from '@/lib/i18n'
-
-type PageContent = {
-  title: string
-  subtitle: string
-  action: string
-  columns: string[]
-  rows: string[][]
-}
-
-type SummaryItem = [label: string, value: string, note: string]
-
-type DataLayoutProps = {
-  content: PageContent
-  summary: SummaryItem[]
-  icon: ComponentType<{ className?: string }>
-  actionIcon: ComponentType<{ className?: string }>
-  minWidth?: string
-  children?: ReactNode
-}
 
 export function DataLayout({
   content,
@@ -98,25 +79,30 @@ export function DataLayout({
               <thead className="bg-muted/40 text-xs text-muted-foreground">
                 <tr>
                   {content.columns.map((column) => (
-                    <th key={column} className="px-5 py-3 font-medium">
+                    <th
+                      key={column}
+                      className="px-5 py-3 font-medium first:ps-5 last:pe-5"
+                    >
                       {t(column)}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody>
-                {visibleRows.map((row) => (
+              <tbody className="divide-y divide-border/60">
+                {visibleRows.map((row, rowIndex) => (
                   <tr
                     key={row[0]}
-                    className="border-t border-border/70 transition-colors hover:bg-muted/25"
+                    className={`transition-colors hover:bg-muted/30 ${
+                      rowIndex % 2 === 1 ? 'bg-muted/10' : ''
+                    }`}
                   >
-                    <td className="px-5 py-3 font-medium text-foreground">
+                    <td className="px-5 py-3.5 font-medium text-foreground">
                       {row[0]}
                     </td>
                     {row.slice(1).map((cell, index) => (
                       <td
                         key={`${row[0]}-${index}`}
-                        className="px-5 py-3 text-muted-foreground"
+                        className="px-5 py-3.5 tabular-nums text-muted-foreground"
                       >
                         {cell.includes('%') ||
                         [

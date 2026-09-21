@@ -1,4 +1,5 @@
 import type { ComponentType } from 'react'
+import type { Report, SummaryItem } from '@/types/shared'
 import { useState } from 'react'
 import { Download, Search } from 'lucide-react'
 import { AppShell } from '@/components/layout/AppShell'
@@ -8,15 +9,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { TablePagination } from '@/features/_shared/TablePagination'
 import { useLanguage } from '@/lib/i18n'
-
-type Report = {
-  title: string
-  subtitle: string
-  columns: string[]
-  rows: string[][]
-}
-
-type SummaryItem = [label: string, value: string, note: string]
 
 export function ReportLayout({
   report,
