@@ -12,7 +12,7 @@ export function Dashboard() {
   const { t } = useLanguage()
 
   return (
-    <AppShell>
+    <>
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="mb-1 text-xs font-semibold uppercase text-primary">
@@ -42,6 +42,6 @@ export function Dashboard() {
         <WorkerProductivity />
         <ExpensesChart />
       </section>
-    </AppShell>
+    </>
   )
 }
