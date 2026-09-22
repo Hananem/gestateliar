@@ -1,71 +1,30 @@
-import { Plus, WalletCards } from 'lucide-react'
-import { Header } from '@/features/_shared/Header'
-import { Cards } from '@/features/_shared/Cards'
-import { DataLayout } from '@/features/_shared/DataLayout'
+import { Receipt, Plus } from 'lucide-react'
 
-const content = {
-  title: 'Dépenses',
-  columns: [
-    'Référence',
-    'Date',
-    'Libellé',
-    'Catégorie',
-    'Montant',
-    'Lot de production',
-    'Statut',
-  ],
-  rows: [
-    [
-      'DEP-2026-0918',
-      '20 sept. 2026',
-      'Électricité atelier',
-      'Charges',
-      '86 400 DA',
-      'Non affectée',
-      'Enregistrée',
-    ],
-    [
-      'DEP-2026-0917',
-      '19 sept. 2026',
-      'Fournitures de coupe',
-      'Fournitures',
-      '24 800 DA',
-      'LOT-2026-0912',
-      'Affectée',
-    ],
-    [
-      'DEP-2026-0916',
-      '18 sept. 2026',
-      'Transport matières',
-      'Transport',
-      '18 500 DA',
-      'LOT-2026-0911',
-      'Affectée',
-    ],
-  ],
-}
+import { HeaderLink } from '@/features/_shared/HeaderLink'
+import { Cards } from '@/features/_shared/Cards'
+import { ExpensesTable } from '@/features/expenses/expenses/components/ExpensesTable'
 
 const summary = [
-  ['Dépenses période', '890 000 DA', '34 dépenses'],
-  ['Dépenses affectées', '612 400 DA', '19 lots'],
-  ['Dépenses récurrentes', '221 500 DA', '3 actives'],
-  ['À affecter', '86 400 DA', '1 dépense'],
+  ['Dépenses', '156', 'Dépenses enregistrées'],
+  ['Ce mois', '42', 'Dépenses du mois'],
+  ['Montant', '385 000 DA', 'Total ce mois'],
 ] as [string, string, string][]
 
 export function Expenses() {
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
-      <Header
+      <HeaderLink
         title="Dépenses"
-        subtitle="Enregistrer les dépenses de l'atelier et les affecter à un lot de production."
-        action="Enregistrer une dépense"
-        icon={WalletCards}
+        subtitle="Saisie et suivi des dépenses de l'atelier."
+        action="Ajouter une dépense"
+        to="/expenses/depenses/ajouter"
+        icon={Receipt}
         actionIcon={Plus}
       />
 
       <Cards summary={summary} />
 
-      <DataLayout content={content} />
+      <ExpensesTable />
     </div>
   )
 }

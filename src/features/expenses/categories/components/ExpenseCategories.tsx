@@ -1,63 +1,29 @@
-import { Plus, FolderTree } from 'lucide-react'
-import { Header } from '@/features/_shared/Header'
-import { Cards } from '@/features/_shared/Cards'
-import { DataLayout } from '@/features/_shared/DataLayout'
+import { Tags, Plus } from 'lucide-react'
 
-const content = {
-  title: 'Catégories',
-  columns: [
-    'Catégorie',
-    'Description',
-    'Dépenses enregistrées',
-    'Montant période',
-    'Statut',
-  ],
-  rows: [
-    [
-      'Matières et fournitures',
-      "Achats liés à l'atelier",
-      '18 dépenses',
-      '426 800 DA',
-      'Active',
-    ],
-    [
-      'Transport',
-      'Livraison et déplacement',
-      '7 dépenses',
-      '118 400 DA',
-      'Active',
-    ],
-    [
-      'Charges',
-      'Électricité et services',
-      '4 dépenses',
-      '212 600 DA',
-      'Active',
-    ],
-  ],
-}
+import { HeaderLink } from '@/features/_shared/HeaderLink'
+import { Cards } from '@/features/_shared/Cards'
+import { ExpenseCategoriesTable } from '@/features/expenses/categories/components/ExpenseCategoriesTable'
 
 const summary = [
-  ['Catégories actives', '8', 'Référentiel'],
-  ['Catégorie principale', '426 800 DA', 'Matières'],
-  ['Dépenses classées', '34', 'Période active'],
-  ['À classer', '2', 'Dépenses'],
+  ['Catégories', '8', 'Catégories enregistrées'],
+  ['Actives', '8', 'Catégories disponibles'],
 ] as [string, string, string][]
 
 export function ExpenseCategories() {
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
-      <Header
+      <HeaderLink
         title="Catégories"
-        subtitle="Classer les dépenses pour faciliter leur suivi et leurs rapports."
+        subtitle="Gestion des catégories de dépenses."
         action="Ajouter une catégorie"
-        icon={FolderTree}
+        to="/expenses/categories/ajouter"
+        icon={Tags}
         actionIcon={Plus}
       />
 
       <Cards summary={summary} />
 
-      <DataLayout content={content} />
+      <ExpenseCategoriesTable />
     </div>
   )
 }
