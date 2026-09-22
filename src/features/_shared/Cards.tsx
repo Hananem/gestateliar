@@ -20,9 +20,9 @@ export function Cards({ summary }: CardsProps) {
             <p className="text-[13px] font-medium text-muted-foreground">
               {t(label)}
             </p>
-            <p className="font-display text-3xl font-bold leading-none tracking-tight text-foreground">
-              {value}
-            </p>
+            <p className="font-display text-3xl font-bold leading-none tracking-tight text-green-800">
+  {value}
+</p>
             <p className="text-xs text-muted-foreground">
               {t(note)}
             </p>

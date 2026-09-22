@@ -1,25 +1,29 @@
-import { Plus } from 'lucide-react'
-import { Header } from '@/features/_shared/Header'
+import { Banknote, Plus } from 'lucide-react'
+
+import { HeaderLink } from '@/features/_shared/HeaderLink'
 import { Cards } from '@/features/_shared/Cards'
-import { DataLayout } from '@/features/_shared/DataLayout'
-import { pages, pageIcons, summary } from '@/features/payroll/data'
+import { PayrollRatesTable } from './PayrollRatesTable'
+
+const summary = [
+  ['Barèmes', '12', 'Barèmes enregistrés'],
+  ['Actifs', '10', 'Barèmes actifs'],
+] as [string, string, string][]
 
 export function PayrollRates() {
-  const content = pages.rates
-
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
-      <Header
-        title={content.title}
-        subtitle={content.subtitle}
-        action={content.action}
-        icon={pageIcons.rates}
+      <HeaderLink
+        title="Barèmes"
+        subtitle="Gestion des tarifs de rémunération des ouvriers."
+        action="Ajouter un barème"
+        to="/payroll/baremes/ajouter"
+        icon={Banknote}
         actionIcon={Plus}
       />
 
-      <Cards summary={summary.rates} />
+      <Cards summary={summary} />
 
-      <DataLayout content={content} />
+      <PayrollRatesTable />
     </div>
   )
 }

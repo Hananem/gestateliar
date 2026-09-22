@@ -1,25 +1,30 @@
-import { Plus } from 'lucide-react'
-import { Header } from '@/features/_shared/Header'
+import { Wallet, Plus } from 'lucide-react'
+
+import { HeaderLink } from '@/features/_shared/HeaderLink'
 import { Cards } from '@/features/_shared/Cards'
-import { DataLayout } from '@/features/_shared/DataLayout'
-import { pages, pageIcons, summary } from '@/features/payroll/data'
+import { PayrollAdvancesTable } from './PayrollAdvancesTable'
+
+const summary = [
+  ['Avances', '24', 'Avances enregistrées'],
+  ['Ce mois', '8', 'Avances du mois'],
+  ['Montant', '185 000 DA', 'Total des avances'],
+] as [string, string, string][]
 
 export function PayrollAdvances() {
-  const content = pages.advances
-
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
-      <Header
-        title={content.title}
-        subtitle={content.subtitle}
-        action={content.action}
-        icon={pageIcons.advances}
+      <HeaderLink
+        title="Avances"
+        subtitle="Gestion des avances versées aux ouvriers."
+        action="Ajouter une avance"
+        to="/payroll/avances/ajouter"
+        icon={Wallet}
         actionIcon={Plus}
       />
 
-      <Cards summary={summary.advances} />
+      <Cards summary={summary} />
 
-      <DataLayout content={content} />
+      <PayrollAdvancesTable />
     </div>
   )
 }

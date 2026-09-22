@@ -1,25 +1,30 @@
-import { Plus } from 'lucide-react'
-import { Header } from '@/features/_shared/Header'
+import { Gift, Plus } from 'lucide-react'
+
+import { HeaderLink } from '@/features/_shared/HeaderLink'
 import { Cards } from '@/features/_shared/Cards'
-import { DataLayout } from '@/features/_shared/DataLayout'
-import { pages, pageIcons, summary } from '@/features/payroll/data'
+import { PayrollBonusesTable } from './PayrollBonusesTable'
+
+const summary = [
+  ['Primes', '18', 'Primes enregistrées'],
+  ['Ce mois', '6', 'Primes du mois'],
+  ['Montant', '75 000 DA', 'Total des primes'],
+] as [string, string, string][]
 
 export function PayrollBonuses() {
-  const content = pages.bonuses
-
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
-      <Header
-        title={content.title}
-        subtitle={content.subtitle}
-        action={content.action}
-        icon={pageIcons.bonuses}
+      <HeaderLink
+        title="Primes"
+        subtitle="Gestion des primes attribuées aux ouvriers."
+        action="Ajouter une prime"
+        to="/payroll/primes/ajouter"
+        icon={Gift}
         actionIcon={Plus}
       />
 
-      <Cards summary={summary.bonuses} />
+      <Cards summary={summary} />
 
-      <DataLayout content={content} />
+      <PayrollBonusesTable />
     </div>
   )
 }
