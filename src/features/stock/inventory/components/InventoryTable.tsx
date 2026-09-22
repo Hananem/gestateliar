@@ -69,7 +69,7 @@ export function InventoryTable() {
   })
 
   return (
-    <>
+   <div className="mt-4.5"> 
       <DataLayout columns={columns} data={inventories} minWidth="min-w-[680px]" />
 
       <ViewInventoryModal
@@ -91,6 +91,6 @@ export function InventoryTable() {
         itemName={deleteTarget?.inventory}
         onConfirm={confirmDeleteInventory}
       />
-    </>
+    </div>
   )
 }

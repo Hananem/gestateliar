@@ -32,10 +32,12 @@ export function AlertsTable() {
   const columns = alertsColumns()
 
   return (
+     <div className="mt-4.5"> 
     <DataLayout
       columns={columns}
       data={alerts}
       minWidth="min-w-[680px]"
     />
+    </div>
   )
 }

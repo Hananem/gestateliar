@@ -26,10 +26,12 @@ export function OverviewTable() {
   const columns = overviewColumns()
 
   return (
+     <div className="mt-4.5">
     <DataLayout
       columns={columns}
       data={overviewData}
       minWidth="min-w-[680px]"
     />
+      </div>
   )
 }

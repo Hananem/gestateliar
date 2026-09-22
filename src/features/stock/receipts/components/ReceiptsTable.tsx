@@ -32,10 +32,13 @@ export function ReceiptsTable() {
   const columns = receiptsColumns()
 
   return (
-    <DataLayout
+    <div className="mt-4.5">
+          <DataLayout
       columns={columns}
       data={receipts}
       minWidth="min-w-[680px]"
     />
+    </div>
+
   )
 }

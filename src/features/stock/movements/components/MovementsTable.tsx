@@ -32,10 +32,12 @@ export function MovementsTable() {
   const columns = movementsColumns()
 
   return (
+    <div className="mt-4.5"> 
     <DataLayout
       columns={columns}
       data={movements}
       minWidth="min-w-[680px]"
     />
+    </div>
   )
 }

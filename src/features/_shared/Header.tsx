@@ -5,7 +5,7 @@ import { useLanguage } from '@/lib/i18n'
 type HeaderProps = {
   title: string
   subtitle: string
-  action: string
+  action?: string  
   icon?: LucideIcon
   actionIcon?: LucideIcon
   onAction?: () => void
@@ -41,10 +41,12 @@ export function Header({
         </div>
       </div>
 
-      <Button variant="default" className="gap-2" onClick={onAction}>
-        {ActionIcon && <ActionIcon className="size-4" />}
-        {t(action)}
-      </Button>
+     {action && (
+  <Button variant="default" className="gap-2" onClick={onAction}>
+    {ActionIcon && <ActionIcon className="size-4" />}
+    {t(action)}
+  </Button>
+)}
     </header>
   )
 }
