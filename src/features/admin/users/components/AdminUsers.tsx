@@ -1,22 +1,30 @@
 import { Users, Plus } from 'lucide-react'
-import { Header } from '@/features/_shared/Header'
-import { DataLayout } from '@/features/_shared/DataLayout'
-import { pages } from '@/features/admin/data'
+
+import { HeaderLink } from '@/features/_shared/HeaderLink'
+import { Cards } from '@/features/_shared/Cards'
+import { UsersTable } from '@/features/admin/users/components/UsersTable'
+
+const summary = [
+  ['Utilisateurs', '12', 'Utilisateurs enregistrés'],
+  ['Actifs', '10', 'Comptes actifs'],
+  ['Inactifs', '2', 'Comptes désactivés'],
+] as [string, string, string][]
 
 export function AdminUsers() {
-  const content = pages.users
-
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
-      <Header
-        title={content.title}
-        subtitle={content.subtitle}
-        action={content.action}
+      <HeaderLink
+        title="Utilisateurs"
+        subtitle="Gestion des utilisateurs de l'application."
+        action="Ajouter un utilisateur"
+        to="/admin/utilisateurs/ajouter"
         icon={Users}
         actionIcon={Plus}
       />
 
-      <DataLayout content={content} />
+      <Cards summary={summary} />
+
+      <UsersTable />
     </div>
   )
 }

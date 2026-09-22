@@ -1,22 +1,18 @@
-import { ClipboardCheck, Download } from 'lucide-react'
+import { ClipboardCheck } from 'lucide-react'
+
 import { Header } from '@/features/_shared/Header'
-import { DataLayout } from '@/features/_shared/DataLayout'
-import { pages } from '@/features/admin/data'
+import { AuditTable } from '@/features/admin/audit/components/AuditTable'
 
 export function AdminAudit() {
-  const content = pages.audit
-
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
       <Header
-        title={content.title}
-        subtitle={content.subtitle}
-        action={content.action}
+        title="Audit"
+        subtitle="Historique des actions effectuées dans l’application."
         icon={ClipboardCheck}
-        actionIcon={Download}
       />
 
-      <DataLayout content={content} />
+      <AuditTable />
     </div>
   )
 }
