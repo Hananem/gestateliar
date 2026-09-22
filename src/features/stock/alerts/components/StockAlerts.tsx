@@ -12,7 +12,7 @@ const summary = [
 
 export function StockAlerts() {
   return (
-    <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
+    <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8 ">
       <Header
         title="Alertes de stock"
         subtitle="Prioriser les matières sous le seuil, épuisées ou proches de la fin de rouleau."

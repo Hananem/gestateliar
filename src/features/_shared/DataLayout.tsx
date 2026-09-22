@@ -70,9 +70,9 @@ export function DataLayout<TData>({
   }
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden border-border">
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b px-5 py-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
         <div className="relative w-full max-w-sm">
           <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
 
@@ -80,7 +80,7 @@ export function DataLayout<TData>({
             value={query}
             onChange={(event) => handleSearch(event.target.value)}
             placeholder="Rechercher..."
-            className="pl-9"
+            className="h-9 pl-9 text-sm"
           />
         </div>
 
@@ -99,11 +99,14 @@ export function DataLayout<TData>({
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <Table className={cn(minWidth)}>
+        <Table className={cn('w-full border-collapse text-sm', minWidth)}>
           <TableHeader>
-            <TableRow>
+            <TableRow className="border-b border-border bg-canvas/60">
               {columns.map((column, index) => (
-                <TableHead key={column.id ?? index}>
+                <TableHead
+                  key={column.id ?? index}
+                  className="px-5 py-3 text-start font-semibold text-muted-foreground"
+                >
                   {typeof column.header === 'string'
                     ? column.header
                     : ''}
@@ -115,7 +118,10 @@ export function DataLayout<TData>({
           <TableBody>
             {paginatedData.length > 0 ? (
               paginatedData.map((item, rowIndex) => (
-                <TableRow key={rowIndex}>
+                <TableRow
+                  key={rowIndex}
+                  className="border-b border-border/60 transition-colors last:border-0 hover:bg-accent/40"
+                >
                   {columns.map((column, columnIndex) => {
                     const columnId =
                       column.id ??
@@ -133,8 +139,16 @@ export function DataLayout<TData>({
                         : undefined
 
                     return (
-                      <TableCell key={columnId ?? columnIndex}>
-                        {'cell' in column && typeof column.cell === 'function'
+                      <TableCell
+                        key={columnId ?? columnIndex}
+                        className={
+                          columnIndex === 0
+                            ? 'px-5 py-3.5 font-medium text-foreground'
+                            : 'px-5 py-3.5 text-foreground/90'
+                        }
+                      >
+                        {'cell' in column &&
+                        typeof column.cell === 'function'
                           ? flexRender(
                               column.cell,
                               {
@@ -153,7 +167,7 @@ export function DataLayout<TData>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center text-muted-foreground"
+                  className="h-24 px-5 text-center text-sm text-muted-foreground"
                 >
                   Aucun résultat.
                 </TableCell>
@@ -164,7 +178,7 @@ export function DataLayout<TData>({
       </div>
 
       {/* Pagination */}
-      <div className="flex flex-wrap items-center justify-center gap-2 border-t px-5 py-4 text-sm font-medium">
+      <div className="flex flex-wrap items-center justify-center gap-2 border-t border-border px-5 py-4 text-sm font-medium">
         {totalPages > 1 && (
           <button
             onClick={() => setPage((prev) => Math.max(0, prev - 1))}
@@ -204,13 +218,13 @@ export function DataLayout<TData>({
       </div>
 
       {/* Page size */}
-      <div className="flex items-center justify-end gap-2 border-t px-5 py-3 text-sm text-muted-foreground">
+      <div className="flex items-center justify-end gap-2 border-t border-border px-5 py-3 text-sm text-muted-foreground">
         <span>Afficher</span>
 
         <select
           value={pageSize}
           onChange={handlePageSizeChange}
-          className="rounded-md border bg-background px-2 py-1 text-foreground"
+          className="rounded-md border border-border bg-background px-2 py-1 text-foreground"
         >
           <option value={10}>10</option>
           <option value={20}>20</option>
