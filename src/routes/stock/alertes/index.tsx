@@ -5,6 +5,6 @@ function AlertesPage() {
   return <StockAlerts />
 }
 
-export const Route = createFileRoute('/stock/alertes')({
+export const Route = createFileRoute('/stock/alertes/')({
   component: AlertesPage,
 })

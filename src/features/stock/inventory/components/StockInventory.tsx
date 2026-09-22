@@ -1,17 +1,9 @@
+import { useState } from 'react'
 import { ClipboardCheck } from 'lucide-react'
 import { Header } from '@/features/_shared/Header'
 import { Cards } from '@/features/_shared/Cards'
-import { DataLayout } from '@/features/_shared/DataLayout'
-
-const content = {
-  title: 'Inventaires',
-  columns: ['Inventaire', 'Périmètre', 'Références', 'Écart', 'Statut'],
-  rows: [
-    ['INV-2026-09-A', 'Tissus', '42 / 42', '-18,5 m', 'À approuver'],
-    ['INV-2026-09-B', 'Accessoires', '96 / 96', '+34 pièces', 'Terminé'],
-    ['INV-2026-08-C', 'Partiel - fils', '18 / 20', '2 références', 'En cours'],
-  ],
-}
+import { InventoryTable } from '@/features/stock/inventory/components/InventoryTable'
+import { CreateInventoryModal } from '@/features/stock/inventory/components/CreateInventoryModal'
 
 const summary = [
   ['Inventaires ouverts', '2', 'À terminer'],
@@ -21,6 +13,8 @@ const summary = [
 ] as [string, string, string][]
 
 export function StockInventory() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
       <Header
@@ -29,11 +23,17 @@ export function StockInventory() {
         action="Créer un inventaire"
         icon={ClipboardCheck}
         actionIcon={ClipboardCheck}
+        onAction={() => setIsModalOpen(true)}
       />
 
       <Cards summary={summary} />
 
-      <DataLayout content={content} minWidth="min-w-[680px]" />
+      <InventoryTable />
+
+     <CreateInventoryModal
+  open={isModalOpen}
+  onOpenChange={setIsModalOpen}
+/>
     </div>
   )
 }

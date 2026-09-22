@@ -12,38 +12,30 @@ import type { NavigationItem } from '@/types/navigation'
 
 export const navigation: NavigationItem[] = [
   { label: 'Dashboard', icon: LayoutDashboard, path: '/' },
-  {
-    label: 'Stock',
-    icon: Boxes,
-    path: '/stock',
-    badge: '3',
-    children: [
-      { label: "Vue d'ensemble", path: '/stock' },
-      { label: 'Matières & accessoires', path: '/stock/matieres' },
-      { label: 'Rouleaux / Lots', path: '/stock/rouleaux-lots' },
-      { label: 'Réceptions', path: '/stock/receptions' },
-      { label: 'Sorties', path: '/stock/sorties' },
-      { label: 'Retours', path: '/stock/retours' },
-      { label: 'Inventaires', path: '/stock/inventaire' },
-      { label: 'Historique des mouvements', path: '/stock/mouvements' },
-      { label: 'Valorisation', path: '/stock/valorisation' },
-      { label: 'Alertes de stock', path: '/stock/alertes' },
-    ],
-  },
-  {
-    label: 'Production',
-    icon: Shirt,
-    path: '/production',
-    children: [
-      { label: "Vue d'ensemble", path: '/production' },
-      { label: 'Articles', path: '/production/articles' },
-      { label: 'Opérations', path: '/production/operations' },
-      { label: 'Lots de production', path: '/production/lots' },
-      { label: 'Consommation', path: '/production/consommation' },
-      { label: 'Avancement', path: '/production/avancement' },
-      { label: 'Rejets', path: '/production/rejets' },
-    ],
-  },
+ {
+  label: 'Stock',
+  icon: Boxes,
+  path: '/stock',
+  children: [
+    { label: "Vue d'ensemble", path: '/stock' },
+    { label: 'Catalogue des matières', path: '/stock/matieres' },
+    { label: 'Entrées de stock', path: '/stock/entrees' },
+    { label: 'Inventaire', path: '/stock/inventaire' },
+    { label: 'Mouvements de stock', path: '/stock/mouvements' },
+    { label: 'Alertes', path: '/stock/alertes' },
+  ],
+},
+ {
+  label: 'Production',
+  icon: Shirt,
+  path: '/production',
+  children: [
+    { label: "Vue d'ensemble", path: '/production' },
+    { label: 'Articles', path: '/production/articles' },
+    { label: 'Lots de production', path: '/production/lots' },
+    { label: 'Avancement', path: '/production/avancement' },
+  ],
+},
   {
     label: 'Équipe',
     icon: Users,

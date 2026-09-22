@@ -1,29 +1,7 @@
 import { Download, History } from 'lucide-react'
 import { Header } from '@/features/_shared/Header'
 import { Cards } from '@/features/_shared/Cards'
-import { DataLayout } from '@/features/_shared/DataLayout'
-
-const content = {
-  title: 'Historique des mouvements',
-  columns: ['Date', 'Type', 'Matière', 'Quantité', 'Utilisateur'],
-  rows: [
-    ['20 sept. · 08:01', 'Sortie', 'Jersey coton noir', '-46 m', 'Fatima M.'],
-    [
-      '20 sept. · 07:42',
-      'Réception',
-      'Jersey coton noir',
-      '+240 m',
-      'Nadia K.',
-    ],
-    [
-      '19 sept. · 16:18',
-      'Retour',
-      'Fil polyester 120',
-      '+2 bobines',
-      'Yacine B.',
-    ],
-  ],
-}
+import { MovementsTable } from '@/features/stock/movements/components/MovementsTable'
 
 const summary = [
   ['Mouvements période', '384', 'Entrées et sorties'],
@@ -45,7 +23,7 @@ export function StockMovements() {
 
       <Cards summary={summary} />
 
-      <DataLayout content={content} minWidth="min-w-[680px]" />
+      <MovementsTable />
     </div>
   )
 }

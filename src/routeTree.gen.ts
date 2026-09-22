@@ -46,11 +46,6 @@ import { Route as ReportsProductionRouteImport } from './routes/reports/producti
 import { Route as ReportsProductiviteRouteImport } from './routes/reports/productivite'
 import { Route as ReportsStockRouteImport } from './routes/reports/stock'
 import { Route as StockIndexRouteImport } from './routes/stock/index'
-import { Route as StockAlertesRouteImport } from './routes/stock/alertes'
-import { Route as StockInventaireRouteImport } from './routes/stock/inventaire'
-import { Route as StockMatieresRouteImport } from './routes/stock/matieres'
-import { Route as StockMouvementsRouteImport } from './routes/stock/mouvements'
-import { Route as StockReceptionsRouteImport } from './routes/stock/receptions'
 import { Route as StockRetoursRouteImport } from './routes/stock/retours'
 import { Route as StockRouleauxLotsRouteImport } from './routes/stock/rouleaux-lots'
 import { Route as StockSortiesRouteImport } from './routes/stock/sorties'
@@ -58,6 +53,12 @@ import { Route as StockValorisationRouteImport } from './routes/stock/valorisati
 import { Route as TeamAffectationsRouteImport } from './routes/team/affectations'
 import { Route as TeamOuvriersRouteImport } from './routes/team/ouvriers'
 import { Route as TeamTravailRouteImport } from './routes/team/travail'
+import { Route as StockAlertesIndexRouteImport } from './routes/stock/alertes/index'
+import { Route as StockEntreesIndexRouteImport } from './routes/stock/entrees/index'
+import { Route as StockInventaireIndexRouteImport } from './routes/stock/inventaire/index'
+import { Route as StockMatieresIndexRouteImport } from './routes/stock/matieres/index'
+import { Route as StockMatieresAjouterRouteImport } from './routes/stock/matieres/ajouter'
+import { Route as StockMouvementsIndexRouteImport } from './routes/stock/mouvements/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -245,31 +246,6 @@ const StockIndexRoute = StockIndexRouteImport.update({
   path: '/',
   getParentRoute: () => StockRouteRoute,
 } as any)
-const StockAlertesRoute = StockAlertesRouteImport.update({
-  id: '/alertes',
-  path: '/alertes',
-  getParentRoute: () => StockRouteRoute,
-} as any)
-const StockInventaireRoute = StockInventaireRouteImport.update({
-  id: '/inventaire',
-  path: '/inventaire',
-  getParentRoute: () => StockRouteRoute,
-} as any)
-const StockMatieresRoute = StockMatieresRouteImport.update({
-  id: '/matieres',
-  path: '/matieres',
-  getParentRoute: () => StockRouteRoute,
-} as any)
-const StockMouvementsRoute = StockMouvementsRouteImport.update({
-  id: '/mouvements',
-  path: '/mouvements',
-  getParentRoute: () => StockRouteRoute,
-} as any)
-const StockReceptionsRoute = StockReceptionsRouteImport.update({
-  id: '/receptions',
-  path: '/receptions',
-  getParentRoute: () => StockRouteRoute,
-} as any)
 const StockRetoursRoute = StockRetoursRouteImport.update({
   id: '/retours',
   path: '/retours',
@@ -304,6 +280,36 @@ const TeamTravailRoute = TeamTravailRouteImport.update({
   id: '/travail',
   path: '/travail',
   getParentRoute: () => TeamRouteRoute,
+} as any)
+const StockAlertesIndexRoute = StockAlertesIndexRouteImport.update({
+  id: '/alertes/',
+  path: '/alertes/',
+  getParentRoute: () => StockRouteRoute,
+} as any)
+const StockEntreesIndexRoute = StockEntreesIndexRouteImport.update({
+  id: '/entrees/',
+  path: '/entrees/',
+  getParentRoute: () => StockRouteRoute,
+} as any)
+const StockInventaireIndexRoute = StockInventaireIndexRouteImport.update({
+  id: '/inventaire/',
+  path: '/inventaire/',
+  getParentRoute: () => StockRouteRoute,
+} as any)
+const StockMatieresIndexRoute = StockMatieresIndexRouteImport.update({
+  id: '/matieres/',
+  path: '/matieres/',
+  getParentRoute: () => StockRouteRoute,
+} as any)
+const StockMatieresAjouterRoute = StockMatieresAjouterRouteImport.update({
+  id: '/matieres/ajouter',
+  path: '/matieres/ajouter',
+  getParentRoute: () => StockRouteRoute,
+} as any)
+const StockMouvementsIndexRoute = StockMouvementsIndexRouteImport.update({
+  id: '/mouvements/',
+  path: '/mouvements/',
+  getParentRoute: () => StockRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -341,11 +347,6 @@ export interface FileRoutesByFullPath {
   '/reports/production': typeof ReportsProductionRoute
   '/reports/productivite': typeof ReportsProductiviteRoute
   '/reports/stock': typeof ReportsStockRoute
-  '/stock/alertes': typeof StockAlertesRoute
-  '/stock/inventaire': typeof StockInventaireRoute
-  '/stock/matieres': typeof StockMatieresRoute
-  '/stock/mouvements': typeof StockMouvementsRoute
-  '/stock/receptions': typeof StockReceptionsRoute
   '/stock/retours': typeof StockRetoursRoute
   '/stock/rouleaux-lots': typeof StockRouleauxLotsRoute
   '/stock/sorties': typeof StockSortiesRoute
@@ -356,6 +357,12 @@ export interface FileRoutesByFullPath {
   '/payroll/': typeof PayrollIndexRoute
   '/production/': typeof ProductionIndexRoute
   '/stock/': typeof StockIndexRoute
+  '/stock/matieres/ajouter': typeof StockMatieresAjouterRoute
+  '/stock/alertes/': typeof StockAlertesIndexRoute
+  '/stock/entrees/': typeof StockEntreesIndexRoute
+  '/stock/inventaire/': typeof StockInventaireIndexRoute
+  '/stock/matieres/': typeof StockMatieresIndexRoute
+  '/stock/mouvements/': typeof StockMouvementsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -389,11 +396,6 @@ export interface FileRoutesByTo {
   '/reports/production': typeof ReportsProductionRoute
   '/reports/productivite': typeof ReportsProductiviteRoute
   '/reports/stock': typeof ReportsStockRoute
-  '/stock/alertes': typeof StockAlertesRoute
-  '/stock/inventaire': typeof StockInventaireRoute
-  '/stock/matieres': typeof StockMatieresRoute
-  '/stock/mouvements': typeof StockMouvementsRoute
-  '/stock/receptions': typeof StockReceptionsRoute
   '/stock/retours': typeof StockRetoursRoute
   '/stock/rouleaux-lots': typeof StockRouleauxLotsRoute
   '/stock/sorties': typeof StockSortiesRoute
@@ -404,6 +406,12 @@ export interface FileRoutesByTo {
   '/payroll': typeof PayrollIndexRoute
   '/production': typeof ProductionIndexRoute
   '/stock': typeof StockIndexRoute
+  '/stock/matieres/ajouter': typeof StockMatieresAjouterRoute
+  '/stock/alertes': typeof StockAlertesIndexRoute
+  '/stock/entrees': typeof StockEntreesIndexRoute
+  '/stock/inventaire': typeof StockInventaireIndexRoute
+  '/stock/matieres': typeof StockMatieresIndexRoute
+  '/stock/mouvements': typeof StockMouvementsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -441,11 +449,6 @@ export interface FileRoutesById {
   '/reports/production': typeof ReportsProductionRoute
   '/reports/productivite': typeof ReportsProductiviteRoute
   '/reports/stock': typeof ReportsStockRoute
-  '/stock/alertes': typeof StockAlertesRoute
-  '/stock/inventaire': typeof StockInventaireRoute
-  '/stock/matieres': typeof StockMatieresRoute
-  '/stock/mouvements': typeof StockMouvementsRoute
-  '/stock/receptions': typeof StockReceptionsRoute
   '/stock/retours': typeof StockRetoursRoute
   '/stock/rouleaux-lots': typeof StockRouleauxLotsRoute
   '/stock/sorties': typeof StockSortiesRoute
@@ -456,6 +459,12 @@ export interface FileRoutesById {
   '/payroll/': typeof PayrollIndexRoute
   '/production/': typeof ProductionIndexRoute
   '/stock/': typeof StockIndexRoute
+  '/stock/matieres/ajouter': typeof StockMatieresAjouterRoute
+  '/stock/alertes/': typeof StockAlertesIndexRoute
+  '/stock/entrees/': typeof StockEntreesIndexRoute
+  '/stock/inventaire/': typeof StockInventaireIndexRoute
+  '/stock/matieres/': typeof StockMatieresIndexRoute
+  '/stock/mouvements/': typeof StockMouvementsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -494,11 +503,6 @@ export interface FileRouteTypes {
     | '/reports/production'
     | '/reports/productivite'
     | '/reports/stock'
-    | '/stock/alertes'
-    | '/stock/inventaire'
-    | '/stock/matieres'
-    | '/stock/mouvements'
-    | '/stock/receptions'
     | '/stock/retours'
     | '/stock/rouleaux-lots'
     | '/stock/sorties'
@@ -509,6 +513,12 @@ export interface FileRouteTypes {
     | '/payroll/'
     | '/production/'
     | '/stock/'
+    | '/stock/matieres/ajouter'
+    | '/stock/alertes/'
+    | '/stock/entrees/'
+    | '/stock/inventaire/'
+    | '/stock/matieres/'
+    | '/stock/mouvements/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -542,11 +552,6 @@ export interface FileRouteTypes {
     | '/reports/production'
     | '/reports/productivite'
     | '/reports/stock'
-    | '/stock/alertes'
-    | '/stock/inventaire'
-    | '/stock/matieres'
-    | '/stock/mouvements'
-    | '/stock/receptions'
     | '/stock/retours'
     | '/stock/rouleaux-lots'
     | '/stock/sorties'
@@ -557,6 +562,12 @@ export interface FileRouteTypes {
     | '/payroll'
     | '/production'
     | '/stock'
+    | '/stock/matieres/ajouter'
+    | '/stock/alertes'
+    | '/stock/entrees'
+    | '/stock/inventaire'
+    | '/stock/matieres'
+    | '/stock/mouvements'
   id:
     | '__root__'
     | '/'
@@ -593,11 +604,6 @@ export interface FileRouteTypes {
     | '/reports/production'
     | '/reports/productivite'
     | '/reports/stock'
-    | '/stock/alertes'
-    | '/stock/inventaire'
-    | '/stock/matieres'
-    | '/stock/mouvements'
-    | '/stock/receptions'
     | '/stock/retours'
     | '/stock/rouleaux-lots'
     | '/stock/sorties'
@@ -608,6 +614,12 @@ export interface FileRouteTypes {
     | '/payroll/'
     | '/production/'
     | '/stock/'
+    | '/stock/matieres/ajouter'
+    | '/stock/alertes/'
+    | '/stock/entrees/'
+    | '/stock/inventaire/'
+    | '/stock/matieres/'
+    | '/stock/mouvements/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -882,41 +894,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StockIndexRouteImport
       parentRoute: typeof StockRouteRoute
     }
-    '/stock/alertes': {
-      id: '/stock/alertes'
-      path: '/alertes'
-      fullPath: '/stock/alertes'
-      preLoaderRoute: typeof StockAlertesRouteImport
-      parentRoute: typeof StockRouteRoute
-    }
-    '/stock/inventaire': {
-      id: '/stock/inventaire'
-      path: '/inventaire'
-      fullPath: '/stock/inventaire'
-      preLoaderRoute: typeof StockInventaireRouteImport
-      parentRoute: typeof StockRouteRoute
-    }
-    '/stock/matieres': {
-      id: '/stock/matieres'
-      path: '/matieres'
-      fullPath: '/stock/matieres'
-      preLoaderRoute: typeof StockMatieresRouteImport
-      parentRoute: typeof StockRouteRoute
-    }
-    '/stock/mouvements': {
-      id: '/stock/mouvements'
-      path: '/mouvements'
-      fullPath: '/stock/mouvements'
-      preLoaderRoute: typeof StockMouvementsRouteImport
-      parentRoute: typeof StockRouteRoute
-    }
-    '/stock/receptions': {
-      id: '/stock/receptions'
-      path: '/receptions'
-      fullPath: '/stock/receptions'
-      preLoaderRoute: typeof StockReceptionsRouteImport
-      parentRoute: typeof StockRouteRoute
-    }
     '/stock/retours': {
       id: '/stock/retours'
       path: '/retours'
@@ -965,6 +942,48 @@ declare module '@tanstack/react-router' {
       fullPath: '/team/travail'
       preLoaderRoute: typeof TeamTravailRouteImport
       parentRoute: typeof TeamRouteRoute
+    }
+    '/stock/alertes/': {
+      id: '/stock/alertes/'
+      path: '/alertes'
+      fullPath: '/stock/alertes/'
+      preLoaderRoute: typeof StockAlertesIndexRouteImport
+      parentRoute: typeof StockRouteRoute
+    }
+    '/stock/entrees/': {
+      id: '/stock/entrees/'
+      path: '/entrees'
+      fullPath: '/stock/entrees/'
+      preLoaderRoute: typeof StockEntreesIndexRouteImport
+      parentRoute: typeof StockRouteRoute
+    }
+    '/stock/inventaire/': {
+      id: '/stock/inventaire/'
+      path: '/inventaire'
+      fullPath: '/stock/inventaire/'
+      preLoaderRoute: typeof StockInventaireIndexRouteImport
+      parentRoute: typeof StockRouteRoute
+    }
+    '/stock/matieres/': {
+      id: '/stock/matieres/'
+      path: '/matieres'
+      fullPath: '/stock/matieres/'
+      preLoaderRoute: typeof StockMatieresIndexRouteImport
+      parentRoute: typeof StockRouteRoute
+    }
+    '/stock/matieres/ajouter': {
+      id: '/stock/matieres/ajouter'
+      path: '/matieres/ajouter'
+      fullPath: '/stock/matieres/ajouter'
+      preLoaderRoute: typeof StockMatieresAjouterRouteImport
+      parentRoute: typeof StockRouteRoute
+    }
+    '/stock/mouvements/': {
+      id: '/stock/mouvements/'
+      path: '/mouvements'
+      fullPath: '/stock/mouvements/'
+      preLoaderRoute: typeof StockMouvementsIndexRouteImport
+      parentRoute: typeof StockRouteRoute
     }
   }
 }
@@ -1076,29 +1095,31 @@ const ReportsRouteRouteWithChildren = ReportsRouteRoute._addFileChildren(
 )
 
 interface StockRouteRouteChildren {
-  StockAlertesRoute: typeof StockAlertesRoute
-  StockInventaireRoute: typeof StockInventaireRoute
-  StockMatieresRoute: typeof StockMatieresRoute
-  StockMouvementsRoute: typeof StockMouvementsRoute
-  StockReceptionsRoute: typeof StockReceptionsRoute
   StockRetoursRoute: typeof StockRetoursRoute
   StockRouleauxLotsRoute: typeof StockRouleauxLotsRoute
   StockSortiesRoute: typeof StockSortiesRoute
   StockValorisationRoute: typeof StockValorisationRoute
   StockIndexRoute: typeof StockIndexRoute
+  StockMatieresAjouterRoute: typeof StockMatieresAjouterRoute
+  StockAlertesIndexRoute: typeof StockAlertesIndexRoute
+  StockEntreesIndexRoute: typeof StockEntreesIndexRoute
+  StockInventaireIndexRoute: typeof StockInventaireIndexRoute
+  StockMatieresIndexRoute: typeof StockMatieresIndexRoute
+  StockMouvementsIndexRoute: typeof StockMouvementsIndexRoute
 }
 
 const StockRouteRouteChildren: StockRouteRouteChildren = {
-  StockAlertesRoute: StockAlertesRoute,
-  StockInventaireRoute: StockInventaireRoute,
-  StockMatieresRoute: StockMatieresRoute,
-  StockMouvementsRoute: StockMouvementsRoute,
-  StockReceptionsRoute: StockReceptionsRoute,
   StockRetoursRoute: StockRetoursRoute,
   StockRouleauxLotsRoute: StockRouleauxLotsRoute,
   StockSortiesRoute: StockSortiesRoute,
   StockValorisationRoute: StockValorisationRoute,
   StockIndexRoute: StockIndexRoute,
+  StockMatieresAjouterRoute: StockMatieresAjouterRoute,
+  StockAlertesIndexRoute: StockAlertesIndexRoute,
+  StockEntreesIndexRoute: StockEntreesIndexRoute,
+  StockInventaireIndexRoute: StockInventaireIndexRoute,
+  StockMatieresIndexRoute: StockMatieresIndexRoute,
+  StockMouvementsIndexRoute: StockMouvementsIndexRoute,
 }
 
 const StockRouteRouteWithChildren = StockRouteRoute._addFileChildren(

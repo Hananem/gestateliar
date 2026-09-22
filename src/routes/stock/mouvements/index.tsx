@@ -5,6 +5,6 @@ function MouvementsPage() {
   return <StockMovements />
 }
 
-export const Route = createFileRoute('/stock/mouvements')({
+export const Route = createFileRoute('/stock/mouvements/')({
   component: MouvementsPage,
 })

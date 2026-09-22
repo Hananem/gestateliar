@@ -1,35 +1,7 @@
 import { Settings2, TriangleAlert } from 'lucide-react'
 import { Header } from '@/features/_shared/Header'
 import { Cards } from '@/features/_shared/Cards'
-import { DataLayout } from '@/features/_shared/DataLayout'
-
-const content = {
-  title: 'Alertes de stock',
-  columns: [
-    'Matière / rouleau',
-    'Quantité actuelle',
-    'Seuil d’alerte',
-    'Fournisseur',
-    'Priorité',
-  ],
-  rows: [
-    ['Lycra bleu nuit', '8 m', '20 m', 'Tissus El Djazair', 'Urgente'],
-    [
-      'Fil polyester 120',
-      '28 bobines',
-      '30 bobines',
-      'Filature de Tlemcen',
-      'À surveiller',
-    ],
-    [
-      'RL-2026-039 · Popeline',
-      '12 m',
-      '15 m',
-      'Tissages de Sétif',
-      'Rouleau faible',
-    ],
-  ],
-}
+import { AlertsTable } from '@/features/stock/alerts/components/AlertsTable'
 
 const summary = [
   ['Alertes ouvertes', '7', '2 urgentes'],
@@ -51,10 +23,7 @@ export function StockAlerts() {
 
       <Cards summary={summary} />
 
-      <DataLayout
-        content={content}
-        minWidth="min-w-[680px]"
-      />
+      <AlertsTable />
     </div>
   )
 }

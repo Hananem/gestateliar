@@ -5,6 +5,6 @@ function InventairePage() {
   return <StockInventory />
 }
 
-export const Route = createFileRoute('/stock/inventaire')({
+export const Route = createFileRoute('/stock/inventaire/')({
   component: InventairePage,
 })

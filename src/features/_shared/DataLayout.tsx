@@ -1,205 +1,225 @@
-import type { DataLayoutProps } from '@/types/shared'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { flexRender, type ColumnDef } from '@tanstack/react-table'
 import { Search, RefreshCw } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
-import { Card } from '@/components/ui/card'
+
 import { Input } from '@/components/ui/input'
-import { TablePagination } from '@/features/_shared/TablePagination'
-import { useLanguage } from '@/lib/i18n'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 
-const STATUS_VALUES = new Set([
-  'Actif',
-  'Active',
-  'Affectée',
-  'Enregistrée',
-  'Clôturée',
-  'En préparation',
-  'À vérifier',
-  'Validé',
-  'Réussie',
-  'Urgente',
-  'À surveiller',
-  'Rouleau faible',
-  'À corriger',
-  'Non payée',
-  'Payée partiellement',
-  'Archivé',
-  'À valider',
-])
-
-function badgeVariant(cell: string) {
-  if (
-    cell === 'Urgente' ||
-    cell === 'Clôturée' ||
-    cell === 'Épuisé' ||
-    cell === 'Épuisée' ||
-    cell === 'Non payée'
-  )
-    return 'destructive'
-
-  if (cell === 'À surveiller') return 'warning'
-  if (cell === 'Rouleau faible') return 'info'
-
-  if (
-    cell === 'Actif' ||
-    cell === 'Active' ||
-    cell === 'Validé' ||
-    cell === 'Réussie' ||
-    cell === 'Affectée' ||
-    cell === 'Enregistrée'
-  )
-    return 'success'
-
-  return 'secondary'
+type DataLayoutProps<TData> = {
+  columns: ColumnDef<TData, unknown>[]
+  data: TData[]
+  minWidth?: string
 }
 
-export function DataLayout({
-  content,
+export function DataLayout<TData>({
+  columns,
+  data,
   minWidth = 'min-w-[720px]',
-  children,
-}: DataLayoutProps) {
-  const { t } = useLanguage()
-  const [page, setPage] = useState(1)
+}: DataLayoutProps<TData>) {
   const [query, setQuery] = useState('')
-  const pageSize = 10
+  const [page, setPage] = useState(0)
+  const [pageSize, setPageSize] = useState(10)
 
-  const filteredRows = query
-    ? content.rows.filter((row) =>
-        row.some((cell) =>
-          cell.toLowerCase().includes(query.toLowerCase()),
-        ),
-      )
-    : content.rows
+  const filteredData = useMemo(() => {
+    if (!query.trim()) return data
 
-  const pageCount = Math.max(
+    const search = query.toLowerCase()
+
+    return data.filter((item) =>
+      Object.values(item as Record<string, unknown>).some((value) =>
+        String(value ?? '')
+          .toLowerCase()
+          .includes(search),
+      ),
+    )
+  }, [data, query])
+
+  const totalPages = Math.max(
     1,
-    Math.ceil(filteredRows.length / pageSize),
+    Math.ceil(filteredData.length / pageSize),
   )
 
-  const safePage = Math.min(page, pageCount)
+  const currentPage = Math.min(page, totalPages - 1)
 
-  const visibleRows = filteredRows.slice(
-    (safePage - 1) * pageSize,
-    safePage * pageSize,
-  )
+  const paginatedData = useMemo(() => {
+    const start = currentPage * pageSize
+
+    return filteredData.slice(start, start + pageSize)
+  }, [filteredData, currentPage, pageSize])
+
+  const handleSearch = (value: string) => {
+    setQuery(value)
+    setPage(0)
+  }
+
+  const handlePageSizeChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setPageSize(Number(event.target.value))
+    setPage(0)
+  }
 
   return (
-    <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
-      {/* Data table */}
-      <Card className="mt-5 overflow-hidden border-border p-0">
-        {/* Table toolbar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
-          <div>
-            <h2 className="font-display text-base font-semibold text-foreground">
-              {t(content.title)}
-            </h2>
+    <Card className="overflow-hidden">
+      {/* Toolbar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b px-5 py-4">
+        <div className="relative w-full max-w-sm">
+          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
 
-            <p className="mt-0.5 flex items-center gap-1.5 text-xs text-muted-foreground">
-              <RefreshCw className="size-3" />
-              {t('Données actualisées à 08:02')}
-            </p>
-          </div>
-
-          <div className="relative">
-            <Search className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-
-            <Input
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value)
-                setPage(1)
-              }}
-              placeholder={t('Rechercher…')}
-              className="h-9 w-full ps-9 pe-3 text-sm sm:w-64"
-            />
-          </div>
+          <Input
+            value={query}
+            onChange={(event) => handleSearch(event.target.value)}
+            placeholder="Rechercher..."
+            className="pl-9"
+          />
         </div>
 
-        {/* Table body */}
-        <div className="overflow-x-auto">
-          <table
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => {
+            setQuery('')
+            setPage(0)
+          }}
+          title="Actualiser"
+        >
+          <RefreshCw className="size-4" />
+        </Button>
+      </div>
+
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <Table className={cn(minWidth)}>
+          <TableHeader>
+            <TableRow>
+              {columns.map((column, index) => (
+                <TableHead key={column.id ?? index}>
+                  {typeof column.header === 'string'
+                    ? column.header
+                    : ''}
+                </TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
+
+          <TableBody>
+            {paginatedData.length > 0 ? (
+              paginatedData.map((item, rowIndex) => (
+                <TableRow key={rowIndex}>
+                  {columns.map((column, columnIndex) => {
+                    const columnId =
+                      column.id ??
+                      ('accessorKey' in column
+                        ? String(column.accessorKey)
+                        : undefined)
+
+                    const value =
+                      columnId &&
+                      'accessorKey' in column &&
+                      column.accessorKey
+                        ? (item as Record<string, unknown>)[
+                            String(column.accessorKey)
+                          ]
+                        : undefined
+
+                    return (
+                      <TableCell key={columnId ?? columnIndex}>
+                        {'cell' in column && typeof column.cell === 'function'
+                          ? flexRender(
+                              column.cell,
+                              {
+                                row: {
+                                  original: item,
+                                },
+                              } as never,
+                            )
+                          : String(value ?? '')}
+                      </TableCell>
+                    )
+                  })}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center text-muted-foreground"
+                >
+                  Aucun résultat.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* Pagination */}
+      <div className="flex flex-wrap items-center justify-center gap-2 border-t px-5 py-4 text-sm font-medium">
+        {totalPages > 1 && (
+          <button
+            onClick={() => setPage((prev) => Math.max(0, prev - 1))}
+            disabled={currentPage === 0}
+            className="cursor-pointer px-2 py-1 text-primary disabled:cursor-not-allowed disabled:text-muted-foreground"
+          >
+            Précédent
+          </button>
+        )}
+
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => setPage(index)}
             className={cn(
-              'w-full border-collapse text-sm',
-              minWidth,
+              'flex size-8 cursor-pointer items-center justify-center rounded-md transition-colors',
+              index === currentPage
+                ? 'bg-primary text-primary-foreground'
+                : 'text-primary hover:bg-primary/10',
             )}
           >
-            <thead>
-              <tr className="border-b border-border bg-canvas/60">
-                {content.columns.map((column) => (
-                  <th
-                    key={column}
-                    className="px-5 py-3 text-start font-semibold text-muted-foreground"
-                  >
-                    {t(column)}
-                  </th>
-                ))}
-              </tr>
-            </thead>
+            {index + 1}
+          </button>
+        ))}
 
-            <tbody>
-              {visibleRows.length === 0 ? (
-                <tr>
-                  <td
-                    colSpan={content.columns.length}
-                    className="px-5 py-12 text-center text-sm text-muted-foreground"
-                  >
-                    Aucun résultat
-                  </td>
-                </tr>
-              ) : (
-                visibleRows.map((row, rowIndex) => (
-                  <tr
-                    key={rowIndex}
-                    className="border-b border-border/60 transition-colors last:border-0 hover:bg-accent/40"
-                  >
-                    <td className="px-5 py-3.5">
-                      <div className="flex items-center gap-3">
-                        {content.images?.[row[0]] && (
-                          <img
-                            src={content.images[row[0]]}
-                            alt={row[0]}
-                            className="size-9 shrink-0 rounded-lg object-cover ring-1 ring-border"
-                          />
-                        )}
+        {totalPages > 1 && (
+          <button
+            onClick={() =>
+              setPage((prev) => Math.min(totalPages - 1, prev + 1))
+            }
+            disabled={currentPage === totalPages - 1}
+            className="cursor-pointer px-2 py-1 text-primary disabled:cursor-not-allowed disabled:text-muted-foreground"
+          >
+            Suivant
+          </button>
+        )}
+      </div>
 
-                        <span className="font-medium text-foreground">
-                          {row[0]}
-                        </span>
-                      </div>
-                    </td>
+      {/* Page size */}
+      <div className="flex items-center justify-end gap-2 border-t px-5 py-3 text-sm text-muted-foreground">
+        <span>Afficher</span>
 
-                    {row.slice(1).map((cell, cellIndex) => (
-                      <td
-                        key={cellIndex}
-                        className="px-5 py-3.5 text-foreground/90"
-                      >
-                        {cell.includes('%') ||
-                        STATUS_VALUES.has(cell) ? (
-                          <Badge variant={badgeVariant(cell)}>
-                            {cell}
-                          </Badge>
-                        ) : (
-                          cell
-                        )}
-                      </td>
-                    ))}
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+        <select
+          value={pageSize}
+          onChange={handlePageSizeChange}
+          className="rounded-md border bg-background px-2 py-1 text-foreground"
+        >
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={30}>30</option>
+          <option value={50}>50</option>
+        </select>
 
-        {/* Pagination */}
-        <TablePagination
-          page={safePage}
-          pageCount={pageCount}
-          onPageChange={setPage}
-        />
-      </Card>
-
-      {children}
-    </div>
+        <span>éléments</span>
+      </div>
+    </Card>
   )
 }

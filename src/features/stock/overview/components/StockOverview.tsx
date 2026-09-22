@@ -1,17 +1,7 @@
 import { PackageCheck } from 'lucide-react'
 import { Header } from '@/features/_shared/Header'
 import { Cards } from '@/features/_shared/Cards'
-import { DataLayout } from '@/features/_shared/DataLayout'
-
-const content = {
-  title: "Vue d'ensemble",
-  columns: ['Indicateur', 'Valeur', 'Évolution'],
-  rows: [
-    ['Matières disponibles', '248 références', '+12 ce mois'],
-    ['Rouleaux actifs', '86 rouleaux', '14 proches du seuil'],
-    ['Lots de production', '12 en cours', 'Dernier mouvement il y a 18 min'],
-  ],
-}
+import { OverviewTable } from '@/features/stock/overview/components/OverviewTable'
 
 const summary = [
   ['Stock total', '58 420 unités', 'Toutes les références'],
@@ -33,7 +23,7 @@ export function StockOverview() {
 
       <Cards summary={summary} />
 
-      <DataLayout content={content} minWidth="min-w-[680px]" />
+      <OverviewTable />
     </div>
   )
 }
