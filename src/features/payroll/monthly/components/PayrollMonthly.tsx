@@ -11,7 +11,7 @@ const summary = [
   ['Net', '1 590 000 DA', 'Net à payer'],
 ] as [string, string, string][]
 
-export function MonthlyPayroll() {
+export function PayrollMonthly() {
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8">
       <Header

@@ -13,17 +13,19 @@ export function Cards({ summary }: CardsProps) {
   const { t } = useLanguage()
 
   return (
-    <div className="mt-7 grid grid-cols-2 gap-3.5 sm:grid-cols-4">
+    <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
       {summary.map(([label, value, note]) => (
         <Card key={label} className="border-border py-0">
-          <CardContent className="flex flex-col gap-2 px-4 py-4">
-            <p className="text-[13px] font-medium text-muted-foreground">
+          <CardContent className="flex min-w-0 flex-col gap-1.5 p-4 sm:gap-2 sm:p-5">
+            <p className="truncate text-xs font-medium text-muted-foreground sm:text-[13px]">
               {t(label)}
             </p>
-            <p className="font-display text-3xl font-bold leading-none tracking-tight text-green-800">
-  {value}
-</p>
-            <p className="text-xs text-muted-foreground">
+
+            <p className="break-words font-display text-2xl font-bold leading-tight tracking-tight text-green-800 sm:text-3xl">
+              {value}
+            </p>
+
+            <p className="text-xs leading-relaxed text-muted-foreground">
               {t(note)}
             </p>
           </CardContent>

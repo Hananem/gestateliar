@@ -1,3 +1,0 @@
-export function PayrollOverview() {
-  return null
-}

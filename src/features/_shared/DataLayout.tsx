@@ -69,11 +69,41 @@ export function DataLayout<TData>({
     setPage(0)
   }
 
+  const renderCell = (column: ColumnDef<TData, unknown>, item: TData) => {
+    const columnId =
+      column.id ??
+      ('accessorKey' in column
+        ? String(column.accessorKey)
+        : undefined)
+
+    const value =
+      columnId &&
+      'accessorKey' in column &&
+      column.accessorKey
+        ? (item as Record<string, unknown>)[
+            String(column.accessorKey)
+          ]
+        : undefined
+
+    if ('cell' in column && typeof column.cell === 'function') {
+      return flexRender(
+        column.cell,
+        {
+          row: {
+            original: item,
+          },
+        } as never,
+      )
+    }
+
+    return String(value ?? '')
+  }
+
   return (
     <Card className="overflow-hidden border-border">
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
-        <div className="relative w-full max-w-sm">
+      <div className="flex flex-col gap-3 border-b border-border px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+        <div className="relative w-full sm:max-w-sm">
           <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
 
           <Input
@@ -92,13 +122,66 @@ export function DataLayout<TData>({
             setPage(0)
           }}
           title="Actualiser"
+          className="self-end sm:self-auto"
         >
           <RefreshCw className="size-4" />
         </Button>
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto">
+      {/* ========================= */}
+      {/* Cards - Mobile / Tablet   */}
+      {/* ========================= */}
+      <div className="space-y-3 p-3 sm:p-4 lg:hidden">
+        {paginatedData.length > 0 ? (
+          paginatedData.map((item, rowIndex) => (
+            <Card
+              key={rowIndex}
+              className="overflow-hidden border-border"
+            >
+              <div className="divide-y divide-border">
+                {columns.map((column, columnIndex) => {
+                  const columnId =
+                    column.id ??
+                    ('accessorKey' in column
+                      ? String(column.accessorKey)
+                      : undefined)
+
+                  return (
+                    <div
+                      key={columnId ?? columnIndex}
+                      className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] gap-4 px-4 py-3 sm:grid-cols-[180px_minmax(0,1fr)]"
+                    >
+                      <span className="min-w-0 text-xs font-semibold text-muted-foreground sm:text-sm">
+                        {typeof column.header === 'string'
+                          ? column.header
+                          : ''}
+                      </span>
+
+                      <span
+                        className={cn(
+                          'min-w-0 break-words text-right text-sm text-foreground sm:text-left',
+                          columnIndex === 0 && 'font-medium',
+                        )}
+                      >
+                        {renderCell(column, item)}
+                      </span>
+                    </div>
+                  )
+                })}
+              </div>
+            </Card>
+          ))
+        ) : (
+          <div className="py-10 text-center text-sm text-muted-foreground">
+            Aucun résultat.
+          </div>
+        )}
+      </div>
+
+      {/* ========================= */}
+      {/* Table - Desktop           */}
+      {/* ========================= */}
+      <div className="hidden overflow-x-auto lg:block">
         <Table className={cn('w-full border-collapse text-sm', minWidth)}>
           <TableHeader>
             <TableRow className="border-b border-border bg-canvas/60">
@@ -129,35 +212,16 @@ export function DataLayout<TData>({
                         ? String(column.accessorKey)
                         : undefined)
 
-                    const value =
-                      columnId &&
-                      'accessorKey' in column &&
-                      column.accessorKey
-                        ? (item as Record<string, unknown>)[
-                            String(column.accessorKey)
-                          ]
-                        : undefined
-
                     return (
                       <TableCell
                         key={columnId ?? columnIndex}
-                        className={
-                          columnIndex === 0
-                            ? 'px-5 py-3.5 font-medium text-foreground'
-                            : 'px-5 py-3.5 text-foreground/90'
-                        }
+                        className={cn(
+                          'px-5 py-3.5 text-foreground/90',
+                          columnIndex === 0 &&
+                            'font-medium text-foreground',
+                        )}
                       >
-                        {'cell' in column &&
-                        typeof column.cell === 'function'
-                          ? flexRender(
-                              column.cell,
-                              {
-                                row: {
-                                  original: item,
-                                },
-                              } as never,
-                            )
-                          : String(value ?? '')}
+                        {renderCell(column, item)}
                       </TableCell>
                     )
                   })}
@@ -178,7 +242,7 @@ export function DataLayout<TData>({
       </div>
 
       {/* Pagination */}
-      <div className="flex flex-wrap items-center justify-center gap-2 border-t border-border px-5 py-4 text-sm font-medium">
+      <div className="flex flex-wrap items-center justify-center gap-1.5 border-t border-border px-3 py-4 text-sm font-medium sm:gap-2 sm:px-5">
         {totalPages > 1 && (
           <button
             onClick={() => setPage((prev) => Math.max(0, prev - 1))}
@@ -207,7 +271,9 @@ export function DataLayout<TData>({
         {totalPages > 1 && (
           <button
             onClick={() =>
-              setPage((prev) => Math.min(totalPages - 1, prev + 1))
+              setPage((prev) =>
+                Math.min(totalPages - 1, prev + 1),
+              )
             }
             disabled={currentPage === totalPages - 1}
             className="cursor-pointer px-2 py-1 text-primary disabled:cursor-not-allowed disabled:text-muted-foreground"
@@ -218,7 +284,7 @@ export function DataLayout<TData>({
       </div>
 
       {/* Page size */}
-      <div className="flex items-center justify-end gap-2 border-t border-border px-5 py-3 text-sm text-muted-foreground">
+      <div className="flex items-center justify-end gap-2 border-t border-border px-4 py-3 text-sm text-muted-foreground sm:px-5">
         <span>Afficher</span>
 
         <select
