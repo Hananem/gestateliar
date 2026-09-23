@@ -5,6 +5,6 @@ function RetenuesPage() {
   return <PayrollDeductions />
 }
 
-export const Route = createFileRoute('/payroll/retenues')({
+export const Route = createFileRoute('/payroll/retenues/retenues')({
   component: RetenuesPage,
 })

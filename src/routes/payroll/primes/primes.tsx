@@ -5,6 +5,6 @@ function PrimesPage() {
   return <PayrollBonuses />
 }
 
-export const Route = createFileRoute('/payroll/primes')({
+export const Route = createFileRoute('/payroll/primes/primes')({
   component: PrimesPage,
 })

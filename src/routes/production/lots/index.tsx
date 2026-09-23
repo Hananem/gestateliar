@@ -5,6 +5,6 @@ function ProductionLotsRoute() {
   return <ProductionLots />
 }
 
-export const Route = createFileRoute('/production/lots')({
+export const Route = createFileRoute('/production/lots/')({
   component: ProductionLotsRoute,
 })

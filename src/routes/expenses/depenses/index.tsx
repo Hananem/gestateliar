@@ -5,6 +5,6 @@ function DepensesPage() {
   return <Expenses />
 }
 
-export const Route = createFileRoute('/expenses/depenses')({
+export const Route = createFileRoute('/expenses/depenses/')({
   component: DepensesPage,
 })

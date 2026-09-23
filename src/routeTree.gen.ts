@@ -21,20 +21,7 @@ import { Route as AdminAuditRouteImport } from './routes/admin/audit'
 import { Route as AdminParametresRouteImport } from './routes/admin/parametres'
 import { Route as AdminRolesPermissionsRouteImport } from './routes/admin/roles-permissions'
 import { Route as AdminUtilisateursRouteImport } from './routes/admin/utilisateurs'
-import { Route as ExpensesCategoriesRouteImport } from './routes/expenses/categories'
-import { Route as ExpensesDepensesRouteImport } from './routes/expenses/depenses'
-import { Route as ExpensesDepensesRecurrentesRouteImport } from './routes/expenses/depenses-recurrentes'
-import { Route as PayrollAvancesRouteImport } from './routes/payroll/avances'
-import { Route as PayrollBaremesRouteImport } from './routes/payroll/baremes'
-import { Route as PayrollCalculMensuelRouteImport } from './routes/payroll/calcul-mensuel'
-import { Route as PayrollCloturesRouteImport } from './routes/payroll/clotures'
-import { Route as PayrollPrimesRouteImport } from './routes/payroll/primes'
-import { Route as PayrollRetenuesRouteImport } from './routes/payroll/retenues'
 import { Route as ProductionIndexRouteImport } from './routes/production/index'
-import { Route as ProductionArticlesRouteImport } from './routes/production/articles'
-import { Route as ProductionAvancementRouteImport } from './routes/production/avancement'
-import { Route as ProductionConsommationRouteImport } from './routes/production/consommation'
-import { Route as ProductionLotsRouteImport } from './routes/production/lots'
 import { Route as ReportsCoutsRouteImport } from './routes/reports/couts'
 import { Route as ReportsDepensesRouteImport } from './routes/reports/depenses'
 import { Route as ReportsPaieRouteImport } from './routes/reports/paie'
@@ -45,6 +32,18 @@ import { Route as StockIndexRouteImport } from './routes/stock/index'
 import { Route as TeamAffectationsRouteImport } from './routes/team/affectations'
 import { Route as TeamOuvriersRouteImport } from './routes/team/ouvriers'
 import { Route as TeamTravailRouteImport } from './routes/team/travail'
+import { Route as ExpensesCategoriesIndexRouteImport } from './routes/expenses/categories/index'
+import { Route as ExpensesDepensesRecurrentesIndexRouteImport } from './routes/expenses/depenses-recurrentes/index'
+import { Route as ExpensesDepensesIndexRouteImport } from './routes/expenses/depenses/index'
+import { Route as PayrollAvancesAvancesRouteImport } from './routes/payroll/avances/avances'
+import { Route as PayrollBaremesBaremesRouteImport } from './routes/payroll/baremes/baremes'
+import { Route as PayrollCalculMensuelCalculMensuelRouteImport } from './routes/payroll/calcul-mensuel/calcul-mensuel'
+import { Route as PayrollCloturesCloturesRouteImport } from './routes/payroll/clotures/clotures'
+import { Route as PayrollPrimesPrimesRouteImport } from './routes/payroll/primes/primes'
+import { Route as PayrollRetenuesRetenuesRouteImport } from './routes/payroll/retenues/retenues'
+import { Route as ProductionArticlesIndexRouteImport } from './routes/production/articles/index'
+import { Route as ProductionAvancementIndexRouteImport } from './routes/production/avancement/index'
+import { Route as ProductionLotsIndexRouteImport } from './routes/production/lots/index'
 import { Route as StockAlertesIndexRouteImport } from './routes/stock/alertes/index'
 import { Route as StockEntreesIndexRouteImport } from './routes/stock/entrees/index'
 import { Route as StockInventaireIndexRouteImport } from './routes/stock/inventaire/index'
@@ -112,75 +111,9 @@ const AdminUtilisateursRoute = AdminUtilisateursRouteImport.update({
   path: '/utilisateurs',
   getParentRoute: () => AdminRouteRoute,
 } as any)
-const ExpensesCategoriesRoute = ExpensesCategoriesRouteImport.update({
-  id: '/categories',
-  path: '/categories',
-  getParentRoute: () => ExpensesRouteRoute,
-} as any)
-const ExpensesDepensesRoute = ExpensesDepensesRouteImport.update({
-  id: '/depenses',
-  path: '/depenses',
-  getParentRoute: () => ExpensesRouteRoute,
-} as any)
-const ExpensesDepensesRecurrentesRoute =
-  ExpensesDepensesRecurrentesRouteImport.update({
-    id: '/depenses-recurrentes',
-    path: '/depenses-recurrentes',
-    getParentRoute: () => ExpensesRouteRoute,
-  } as any)
-const PayrollAvancesRoute = PayrollAvancesRouteImport.update({
-  id: '/avances',
-  path: '/avances',
-  getParentRoute: () => PayrollRouteRoute,
-} as any)
-const PayrollBaremesRoute = PayrollBaremesRouteImport.update({
-  id: '/baremes',
-  path: '/baremes',
-  getParentRoute: () => PayrollRouteRoute,
-} as any)
-const PayrollCalculMensuelRoute = PayrollCalculMensuelRouteImport.update({
-  id: '/calcul-mensuel',
-  path: '/calcul-mensuel',
-  getParentRoute: () => PayrollRouteRoute,
-} as any)
-const PayrollCloturesRoute = PayrollCloturesRouteImport.update({
-  id: '/clotures',
-  path: '/clotures',
-  getParentRoute: () => PayrollRouteRoute,
-} as any)
-const PayrollPrimesRoute = PayrollPrimesRouteImport.update({
-  id: '/primes',
-  path: '/primes',
-  getParentRoute: () => PayrollRouteRoute,
-} as any)
-const PayrollRetenuesRoute = PayrollRetenuesRouteImport.update({
-  id: '/retenues',
-  path: '/retenues',
-  getParentRoute: () => PayrollRouteRoute,
-} as any)
 const ProductionIndexRoute = ProductionIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => ProductionRouteRoute,
-} as any)
-const ProductionArticlesRoute = ProductionArticlesRouteImport.update({
-  id: '/articles',
-  path: '/articles',
-  getParentRoute: () => ProductionRouteRoute,
-} as any)
-const ProductionAvancementRoute = ProductionAvancementRouteImport.update({
-  id: '/avancement',
-  path: '/avancement',
-  getParentRoute: () => ProductionRouteRoute,
-} as any)
-const ProductionConsommationRoute = ProductionConsommationRouteImport.update({
-  id: '/consommation',
-  path: '/consommation',
-  getParentRoute: () => ProductionRouteRoute,
-} as any)
-const ProductionLotsRoute = ProductionLotsRouteImport.update({
-  id: '/lots',
-  path: '/lots',
   getParentRoute: () => ProductionRouteRoute,
 } as any)
 const ReportsCoutsRoute = ReportsCoutsRouteImport.update({
@@ -233,6 +166,69 @@ const TeamTravailRoute = TeamTravailRouteImport.update({
   path: '/travail',
   getParentRoute: () => TeamRouteRoute,
 } as any)
+const ExpensesCategoriesIndexRoute = ExpensesCategoriesIndexRouteImport.update({
+  id: '/categories/',
+  path: '/categories/',
+  getParentRoute: () => ExpensesRouteRoute,
+} as any)
+const ExpensesDepensesRecurrentesIndexRoute =
+  ExpensesDepensesRecurrentesIndexRouteImport.update({
+    id: '/depenses-recurrentes/',
+    path: '/depenses-recurrentes/',
+    getParentRoute: () => ExpensesRouteRoute,
+  } as any)
+const ExpensesDepensesIndexRoute = ExpensesDepensesIndexRouteImport.update({
+  id: '/depenses/',
+  path: '/depenses/',
+  getParentRoute: () => ExpensesRouteRoute,
+} as any)
+const PayrollAvancesAvancesRoute = PayrollAvancesAvancesRouteImport.update({
+  id: '/avances/avances',
+  path: '/avances/avances',
+  getParentRoute: () => PayrollRouteRoute,
+} as any)
+const PayrollBaremesBaremesRoute = PayrollBaremesBaremesRouteImport.update({
+  id: '/baremes/baremes',
+  path: '/baremes/baremes',
+  getParentRoute: () => PayrollRouteRoute,
+} as any)
+const PayrollCalculMensuelCalculMensuelRoute =
+  PayrollCalculMensuelCalculMensuelRouteImport.update({
+    id: '/calcul-mensuel/calcul-mensuel',
+    path: '/calcul-mensuel/calcul-mensuel',
+    getParentRoute: () => PayrollRouteRoute,
+  } as any)
+const PayrollCloturesCloturesRoute = PayrollCloturesCloturesRouteImport.update({
+  id: '/clotures/clotures',
+  path: '/clotures/clotures',
+  getParentRoute: () => PayrollRouteRoute,
+} as any)
+const PayrollPrimesPrimesRoute = PayrollPrimesPrimesRouteImport.update({
+  id: '/primes/primes',
+  path: '/primes/primes',
+  getParentRoute: () => PayrollRouteRoute,
+} as any)
+const PayrollRetenuesRetenuesRoute = PayrollRetenuesRetenuesRouteImport.update({
+  id: '/retenues/retenues',
+  path: '/retenues/retenues',
+  getParentRoute: () => PayrollRouteRoute,
+} as any)
+const ProductionArticlesIndexRoute = ProductionArticlesIndexRouteImport.update({
+  id: '/articles/',
+  path: '/articles/',
+  getParentRoute: () => ProductionRouteRoute,
+} as any)
+const ProductionAvancementIndexRoute =
+  ProductionAvancementIndexRouteImport.update({
+    id: '/avancement/',
+    path: '/avancement/',
+    getParentRoute: () => ProductionRouteRoute,
+  } as any)
+const ProductionLotsIndexRoute = ProductionLotsIndexRouteImport.update({
+  id: '/lots/',
+  path: '/lots/',
+  getParentRoute: () => ProductionRouteRoute,
+} as any)
 const StockAlertesIndexRoute = StockAlertesIndexRouteImport.update({
   id: '/alertes/',
   path: '/alertes/',
@@ -277,19 +273,6 @@ export interface FileRoutesByFullPath {
   '/admin/parametres': typeof AdminParametresRoute
   '/admin/roles-permissions': typeof AdminRolesPermissionsRoute
   '/admin/utilisateurs': typeof AdminUtilisateursRoute
-  '/expenses/categories': typeof ExpensesCategoriesRoute
-  '/expenses/depenses': typeof ExpensesDepensesRoute
-  '/expenses/depenses-recurrentes': typeof ExpensesDepensesRecurrentesRoute
-  '/payroll/avances': typeof PayrollAvancesRoute
-  '/payroll/baremes': typeof PayrollBaremesRoute
-  '/payroll/calcul-mensuel': typeof PayrollCalculMensuelRoute
-  '/payroll/clotures': typeof PayrollCloturesRoute
-  '/payroll/primes': typeof PayrollPrimesRoute
-  '/payroll/retenues': typeof PayrollRetenuesRoute
-  '/production/articles': typeof ProductionArticlesRoute
-  '/production/avancement': typeof ProductionAvancementRoute
-  '/production/consommation': typeof ProductionConsommationRoute
-  '/production/lots': typeof ProductionLotsRoute
   '/reports/couts': typeof ReportsCoutsRoute
   '/reports/depenses': typeof ReportsDepensesRoute
   '/reports/paie': typeof ReportsPaieRoute
@@ -301,7 +284,19 @@ export interface FileRoutesByFullPath {
   '/team/travail': typeof TeamTravailRoute
   '/production/': typeof ProductionIndexRoute
   '/stock/': typeof StockIndexRoute
+  '/payroll/avances/avances': typeof PayrollAvancesAvancesRoute
+  '/payroll/baremes/baremes': typeof PayrollBaremesBaremesRoute
+  '/payroll/calcul-mensuel/calcul-mensuel': typeof PayrollCalculMensuelCalculMensuelRoute
+  '/payroll/clotures/clotures': typeof PayrollCloturesCloturesRoute
+  '/payroll/primes/primes': typeof PayrollPrimesPrimesRoute
+  '/payroll/retenues/retenues': typeof PayrollRetenuesRetenuesRoute
   '/stock/matieres/ajouter': typeof StockMatieresAjouterRoute
+  '/expenses/categories/': typeof ExpensesCategoriesIndexRoute
+  '/expenses/depenses-recurrentes/': typeof ExpensesDepensesRecurrentesIndexRoute
+  '/expenses/depenses/': typeof ExpensesDepensesIndexRoute
+  '/production/articles/': typeof ProductionArticlesIndexRoute
+  '/production/avancement/': typeof ProductionAvancementIndexRoute
+  '/production/lots/': typeof ProductionLotsIndexRoute
   '/stock/alertes/': typeof StockAlertesIndexRoute
   '/stock/entrees/': typeof StockEntreesIndexRoute
   '/stock/inventaire/': typeof StockInventaireIndexRoute
@@ -319,19 +314,6 @@ export interface FileRoutesByTo {
   '/admin/parametres': typeof AdminParametresRoute
   '/admin/roles-permissions': typeof AdminRolesPermissionsRoute
   '/admin/utilisateurs': typeof AdminUtilisateursRoute
-  '/expenses/categories': typeof ExpensesCategoriesRoute
-  '/expenses/depenses': typeof ExpensesDepensesRoute
-  '/expenses/depenses-recurrentes': typeof ExpensesDepensesRecurrentesRoute
-  '/payroll/avances': typeof PayrollAvancesRoute
-  '/payroll/baremes': typeof PayrollBaremesRoute
-  '/payroll/calcul-mensuel': typeof PayrollCalculMensuelRoute
-  '/payroll/clotures': typeof PayrollCloturesRoute
-  '/payroll/primes': typeof PayrollPrimesRoute
-  '/payroll/retenues': typeof PayrollRetenuesRoute
-  '/production/articles': typeof ProductionArticlesRoute
-  '/production/avancement': typeof ProductionAvancementRoute
-  '/production/consommation': typeof ProductionConsommationRoute
-  '/production/lots': typeof ProductionLotsRoute
   '/reports/couts': typeof ReportsCoutsRoute
   '/reports/depenses': typeof ReportsDepensesRoute
   '/reports/paie': typeof ReportsPaieRoute
@@ -343,7 +325,19 @@ export interface FileRoutesByTo {
   '/team/travail': typeof TeamTravailRoute
   '/production': typeof ProductionIndexRoute
   '/stock': typeof StockIndexRoute
+  '/payroll/avances/avances': typeof PayrollAvancesAvancesRoute
+  '/payroll/baremes/baremes': typeof PayrollBaremesBaremesRoute
+  '/payroll/calcul-mensuel/calcul-mensuel': typeof PayrollCalculMensuelCalculMensuelRoute
+  '/payroll/clotures/clotures': typeof PayrollCloturesCloturesRoute
+  '/payroll/primes/primes': typeof PayrollPrimesPrimesRoute
+  '/payroll/retenues/retenues': typeof PayrollRetenuesRetenuesRoute
   '/stock/matieres/ajouter': typeof StockMatieresAjouterRoute
+  '/expenses/categories': typeof ExpensesCategoriesIndexRoute
+  '/expenses/depenses-recurrentes': typeof ExpensesDepensesRecurrentesIndexRoute
+  '/expenses/depenses': typeof ExpensesDepensesIndexRoute
+  '/production/articles': typeof ProductionArticlesIndexRoute
+  '/production/avancement': typeof ProductionAvancementIndexRoute
+  '/production/lots': typeof ProductionLotsIndexRoute
   '/stock/alertes': typeof StockAlertesIndexRoute
   '/stock/entrees': typeof StockEntreesIndexRoute
   '/stock/inventaire': typeof StockInventaireIndexRoute
@@ -364,19 +358,6 @@ export interface FileRoutesById {
   '/admin/parametres': typeof AdminParametresRoute
   '/admin/roles-permissions': typeof AdminRolesPermissionsRoute
   '/admin/utilisateurs': typeof AdminUtilisateursRoute
-  '/expenses/categories': typeof ExpensesCategoriesRoute
-  '/expenses/depenses': typeof ExpensesDepensesRoute
-  '/expenses/depenses-recurrentes': typeof ExpensesDepensesRecurrentesRoute
-  '/payroll/avances': typeof PayrollAvancesRoute
-  '/payroll/baremes': typeof PayrollBaremesRoute
-  '/payroll/calcul-mensuel': typeof PayrollCalculMensuelRoute
-  '/payroll/clotures': typeof PayrollCloturesRoute
-  '/payroll/primes': typeof PayrollPrimesRoute
-  '/payroll/retenues': typeof PayrollRetenuesRoute
-  '/production/articles': typeof ProductionArticlesRoute
-  '/production/avancement': typeof ProductionAvancementRoute
-  '/production/consommation': typeof ProductionConsommationRoute
-  '/production/lots': typeof ProductionLotsRoute
   '/reports/couts': typeof ReportsCoutsRoute
   '/reports/depenses': typeof ReportsDepensesRoute
   '/reports/paie': typeof ReportsPaieRoute
@@ -388,7 +369,19 @@ export interface FileRoutesById {
   '/team/travail': typeof TeamTravailRoute
   '/production/': typeof ProductionIndexRoute
   '/stock/': typeof StockIndexRoute
+  '/payroll/avances/avances': typeof PayrollAvancesAvancesRoute
+  '/payroll/baremes/baremes': typeof PayrollBaremesBaremesRoute
+  '/payroll/calcul-mensuel/calcul-mensuel': typeof PayrollCalculMensuelCalculMensuelRoute
+  '/payroll/clotures/clotures': typeof PayrollCloturesCloturesRoute
+  '/payroll/primes/primes': typeof PayrollPrimesPrimesRoute
+  '/payroll/retenues/retenues': typeof PayrollRetenuesRetenuesRoute
   '/stock/matieres/ajouter': typeof StockMatieresAjouterRoute
+  '/expenses/categories/': typeof ExpensesCategoriesIndexRoute
+  '/expenses/depenses-recurrentes/': typeof ExpensesDepensesRecurrentesIndexRoute
+  '/expenses/depenses/': typeof ExpensesDepensesIndexRoute
+  '/production/articles/': typeof ProductionArticlesIndexRoute
+  '/production/avancement/': typeof ProductionAvancementIndexRoute
+  '/production/lots/': typeof ProductionLotsIndexRoute
   '/stock/alertes/': typeof StockAlertesIndexRoute
   '/stock/entrees/': typeof StockEntreesIndexRoute
   '/stock/inventaire/': typeof StockInventaireIndexRoute
@@ -410,19 +403,6 @@ export interface FileRouteTypes {
     | '/admin/parametres'
     | '/admin/roles-permissions'
     | '/admin/utilisateurs'
-    | '/expenses/categories'
-    | '/expenses/depenses'
-    | '/expenses/depenses-recurrentes'
-    | '/payroll/avances'
-    | '/payroll/baremes'
-    | '/payroll/calcul-mensuel'
-    | '/payroll/clotures'
-    | '/payroll/primes'
-    | '/payroll/retenues'
-    | '/production/articles'
-    | '/production/avancement'
-    | '/production/consommation'
-    | '/production/lots'
     | '/reports/couts'
     | '/reports/depenses'
     | '/reports/paie'
@@ -434,7 +414,19 @@ export interface FileRouteTypes {
     | '/team/travail'
     | '/production/'
     | '/stock/'
+    | '/payroll/avances/avances'
+    | '/payroll/baremes/baremes'
+    | '/payroll/calcul-mensuel/calcul-mensuel'
+    | '/payroll/clotures/clotures'
+    | '/payroll/primes/primes'
+    | '/payroll/retenues/retenues'
     | '/stock/matieres/ajouter'
+    | '/expenses/categories/'
+    | '/expenses/depenses-recurrentes/'
+    | '/expenses/depenses/'
+    | '/production/articles/'
+    | '/production/avancement/'
+    | '/production/lots/'
     | '/stock/alertes/'
     | '/stock/entrees/'
     | '/stock/inventaire/'
@@ -452,19 +444,6 @@ export interface FileRouteTypes {
     | '/admin/parametres'
     | '/admin/roles-permissions'
     | '/admin/utilisateurs'
-    | '/expenses/categories'
-    | '/expenses/depenses'
-    | '/expenses/depenses-recurrentes'
-    | '/payroll/avances'
-    | '/payroll/baremes'
-    | '/payroll/calcul-mensuel'
-    | '/payroll/clotures'
-    | '/payroll/primes'
-    | '/payroll/retenues'
-    | '/production/articles'
-    | '/production/avancement'
-    | '/production/consommation'
-    | '/production/lots'
     | '/reports/couts'
     | '/reports/depenses'
     | '/reports/paie'
@@ -476,7 +455,19 @@ export interface FileRouteTypes {
     | '/team/travail'
     | '/production'
     | '/stock'
+    | '/payroll/avances/avances'
+    | '/payroll/baremes/baremes'
+    | '/payroll/calcul-mensuel/calcul-mensuel'
+    | '/payroll/clotures/clotures'
+    | '/payroll/primes/primes'
+    | '/payroll/retenues/retenues'
     | '/stock/matieres/ajouter'
+    | '/expenses/categories'
+    | '/expenses/depenses-recurrentes'
+    | '/expenses/depenses'
+    | '/production/articles'
+    | '/production/avancement'
+    | '/production/lots'
     | '/stock/alertes'
     | '/stock/entrees'
     | '/stock/inventaire'
@@ -496,19 +487,6 @@ export interface FileRouteTypes {
     | '/admin/parametres'
     | '/admin/roles-permissions'
     | '/admin/utilisateurs'
-    | '/expenses/categories'
-    | '/expenses/depenses'
-    | '/expenses/depenses-recurrentes'
-    | '/payroll/avances'
-    | '/payroll/baremes'
-    | '/payroll/calcul-mensuel'
-    | '/payroll/clotures'
-    | '/payroll/primes'
-    | '/payroll/retenues'
-    | '/production/articles'
-    | '/production/avancement'
-    | '/production/consommation'
-    | '/production/lots'
     | '/reports/couts'
     | '/reports/depenses'
     | '/reports/paie'
@@ -520,7 +498,19 @@ export interface FileRouteTypes {
     | '/team/travail'
     | '/production/'
     | '/stock/'
+    | '/payroll/avances/avances'
+    | '/payroll/baremes/baremes'
+    | '/payroll/calcul-mensuel/calcul-mensuel'
+    | '/payroll/clotures/clotures'
+    | '/payroll/primes/primes'
+    | '/payroll/retenues/retenues'
     | '/stock/matieres/ajouter'
+    | '/expenses/categories/'
+    | '/expenses/depenses-recurrentes/'
+    | '/expenses/depenses/'
+    | '/production/articles/'
+    | '/production/avancement/'
+    | '/production/lots/'
     | '/stock/alertes/'
     | '/stock/entrees/'
     | '/stock/inventaire/'
@@ -625,102 +615,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUtilisateursRouteImport
       parentRoute: typeof AdminRouteRoute
     }
-    '/expenses/categories': {
-      id: '/expenses/categories'
-      path: '/categories'
-      fullPath: '/expenses/categories'
-      preLoaderRoute: typeof ExpensesCategoriesRouteImport
-      parentRoute: typeof ExpensesRouteRoute
-    }
-    '/expenses/depenses': {
-      id: '/expenses/depenses'
-      path: '/depenses'
-      fullPath: '/expenses/depenses'
-      preLoaderRoute: typeof ExpensesDepensesRouteImport
-      parentRoute: typeof ExpensesRouteRoute
-    }
-    '/expenses/depenses-recurrentes': {
-      id: '/expenses/depenses-recurrentes'
-      path: '/depenses-recurrentes'
-      fullPath: '/expenses/depenses-recurrentes'
-      preLoaderRoute: typeof ExpensesDepensesRecurrentesRouteImport
-      parentRoute: typeof ExpensesRouteRoute
-    }
-    '/payroll/avances': {
-      id: '/payroll/avances'
-      path: '/avances'
-      fullPath: '/payroll/avances'
-      preLoaderRoute: typeof PayrollAvancesRouteImport
-      parentRoute: typeof PayrollRouteRoute
-    }
-    '/payroll/baremes': {
-      id: '/payroll/baremes'
-      path: '/baremes'
-      fullPath: '/payroll/baremes'
-      preLoaderRoute: typeof PayrollBaremesRouteImport
-      parentRoute: typeof PayrollRouteRoute
-    }
-    '/payroll/calcul-mensuel': {
-      id: '/payroll/calcul-mensuel'
-      path: '/calcul-mensuel'
-      fullPath: '/payroll/calcul-mensuel'
-      preLoaderRoute: typeof PayrollCalculMensuelRouteImport
-      parentRoute: typeof PayrollRouteRoute
-    }
-    '/payroll/clotures': {
-      id: '/payroll/clotures'
-      path: '/clotures'
-      fullPath: '/payroll/clotures'
-      preLoaderRoute: typeof PayrollCloturesRouteImport
-      parentRoute: typeof PayrollRouteRoute
-    }
-    '/payroll/primes': {
-      id: '/payroll/primes'
-      path: '/primes'
-      fullPath: '/payroll/primes'
-      preLoaderRoute: typeof PayrollPrimesRouteImport
-      parentRoute: typeof PayrollRouteRoute
-    }
-    '/payroll/retenues': {
-      id: '/payroll/retenues'
-      path: '/retenues'
-      fullPath: '/payroll/retenues'
-      preLoaderRoute: typeof PayrollRetenuesRouteImport
-      parentRoute: typeof PayrollRouteRoute
-    }
     '/production/': {
       id: '/production/'
       path: '/'
       fullPath: '/production/'
       preLoaderRoute: typeof ProductionIndexRouteImport
-      parentRoute: typeof ProductionRouteRoute
-    }
-    '/production/articles': {
-      id: '/production/articles'
-      path: '/articles'
-      fullPath: '/production/articles'
-      preLoaderRoute: typeof ProductionArticlesRouteImport
-      parentRoute: typeof ProductionRouteRoute
-    }
-    '/production/avancement': {
-      id: '/production/avancement'
-      path: '/avancement'
-      fullPath: '/production/avancement'
-      preLoaderRoute: typeof ProductionAvancementRouteImport
-      parentRoute: typeof ProductionRouteRoute
-    }
-    '/production/consommation': {
-      id: '/production/consommation'
-      path: '/consommation'
-      fullPath: '/production/consommation'
-      preLoaderRoute: typeof ProductionConsommationRouteImport
-      parentRoute: typeof ProductionRouteRoute
-    }
-    '/production/lots': {
-      id: '/production/lots'
-      path: '/lots'
-      fullPath: '/production/lots'
-      preLoaderRoute: typeof ProductionLotsRouteImport
       parentRoute: typeof ProductionRouteRoute
     }
     '/reports/couts': {
@@ -793,6 +692,90 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeamTravailRouteImport
       parentRoute: typeof TeamRouteRoute
     }
+    '/expenses/categories/': {
+      id: '/expenses/categories/'
+      path: '/categories'
+      fullPath: '/expenses/categories/'
+      preLoaderRoute: typeof ExpensesCategoriesIndexRouteImport
+      parentRoute: typeof ExpensesRouteRoute
+    }
+    '/expenses/depenses-recurrentes/': {
+      id: '/expenses/depenses-recurrentes/'
+      path: '/depenses-recurrentes'
+      fullPath: '/expenses/depenses-recurrentes/'
+      preLoaderRoute: typeof ExpensesDepensesRecurrentesIndexRouteImport
+      parentRoute: typeof ExpensesRouteRoute
+    }
+    '/expenses/depenses/': {
+      id: '/expenses/depenses/'
+      path: '/depenses'
+      fullPath: '/expenses/depenses/'
+      preLoaderRoute: typeof ExpensesDepensesIndexRouteImport
+      parentRoute: typeof ExpensesRouteRoute
+    }
+    '/payroll/avances/avances': {
+      id: '/payroll/avances/avances'
+      path: '/avances/avances'
+      fullPath: '/payroll/avances/avances'
+      preLoaderRoute: typeof PayrollAvancesAvancesRouteImport
+      parentRoute: typeof PayrollRouteRoute
+    }
+    '/payroll/baremes/baremes': {
+      id: '/payroll/baremes/baremes'
+      path: '/baremes/baremes'
+      fullPath: '/payroll/baremes/baremes'
+      preLoaderRoute: typeof PayrollBaremesBaremesRouteImport
+      parentRoute: typeof PayrollRouteRoute
+    }
+    '/payroll/calcul-mensuel/calcul-mensuel': {
+      id: '/payroll/calcul-mensuel/calcul-mensuel'
+      path: '/calcul-mensuel/calcul-mensuel'
+      fullPath: '/payroll/calcul-mensuel/calcul-mensuel'
+      preLoaderRoute: typeof PayrollCalculMensuelCalculMensuelRouteImport
+      parentRoute: typeof PayrollRouteRoute
+    }
+    '/payroll/clotures/clotures': {
+      id: '/payroll/clotures/clotures'
+      path: '/clotures/clotures'
+      fullPath: '/payroll/clotures/clotures'
+      preLoaderRoute: typeof PayrollCloturesCloturesRouteImport
+      parentRoute: typeof PayrollRouteRoute
+    }
+    '/payroll/primes/primes': {
+      id: '/payroll/primes/primes'
+      path: '/primes/primes'
+      fullPath: '/payroll/primes/primes'
+      preLoaderRoute: typeof PayrollPrimesPrimesRouteImport
+      parentRoute: typeof PayrollRouteRoute
+    }
+    '/payroll/retenues/retenues': {
+      id: '/payroll/retenues/retenues'
+      path: '/retenues/retenues'
+      fullPath: '/payroll/retenues/retenues'
+      preLoaderRoute: typeof PayrollRetenuesRetenuesRouteImport
+      parentRoute: typeof PayrollRouteRoute
+    }
+    '/production/articles/': {
+      id: '/production/articles/'
+      path: '/articles'
+      fullPath: '/production/articles/'
+      preLoaderRoute: typeof ProductionArticlesIndexRouteImport
+      parentRoute: typeof ProductionRouteRoute
+    }
+    '/production/avancement/': {
+      id: '/production/avancement/'
+      path: '/avancement'
+      fullPath: '/production/avancement/'
+      preLoaderRoute: typeof ProductionAvancementIndexRouteImport
+      parentRoute: typeof ProductionRouteRoute
+    }
+    '/production/lots/': {
+      id: '/production/lots/'
+      path: '/lots'
+      fullPath: '/production/lots/'
+      preLoaderRoute: typeof ProductionLotsIndexRouteImport
+      parentRoute: typeof ProductionRouteRoute
+    }
     '/stock/alertes/': {
       id: '/stock/alertes/'
       path: '/alertes'
@@ -857,15 +840,15 @@ const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
 )
 
 interface ExpensesRouteRouteChildren {
-  ExpensesCategoriesRoute: typeof ExpensesCategoriesRoute
-  ExpensesDepensesRoute: typeof ExpensesDepensesRoute
-  ExpensesDepensesRecurrentesRoute: typeof ExpensesDepensesRecurrentesRoute
+  ExpensesCategoriesIndexRoute: typeof ExpensesCategoriesIndexRoute
+  ExpensesDepensesRecurrentesIndexRoute: typeof ExpensesDepensesRecurrentesIndexRoute
+  ExpensesDepensesIndexRoute: typeof ExpensesDepensesIndexRoute
 }
 
 const ExpensesRouteRouteChildren: ExpensesRouteRouteChildren = {
-  ExpensesCategoriesRoute: ExpensesCategoriesRoute,
-  ExpensesDepensesRoute: ExpensesDepensesRoute,
-  ExpensesDepensesRecurrentesRoute: ExpensesDepensesRecurrentesRoute,
+  ExpensesCategoriesIndexRoute: ExpensesCategoriesIndexRoute,
+  ExpensesDepensesRecurrentesIndexRoute: ExpensesDepensesRecurrentesIndexRoute,
+  ExpensesDepensesIndexRoute: ExpensesDepensesIndexRoute,
 }
 
 const ExpensesRouteRouteWithChildren = ExpensesRouteRoute._addFileChildren(
@@ -873,21 +856,22 @@ const ExpensesRouteRouteWithChildren = ExpensesRouteRoute._addFileChildren(
 )
 
 interface PayrollRouteRouteChildren {
-  PayrollAvancesRoute: typeof PayrollAvancesRoute
-  PayrollBaremesRoute: typeof PayrollBaremesRoute
-  PayrollCalculMensuelRoute: typeof PayrollCalculMensuelRoute
-  PayrollCloturesRoute: typeof PayrollCloturesRoute
-  PayrollPrimesRoute: typeof PayrollPrimesRoute
-  PayrollRetenuesRoute: typeof PayrollRetenuesRoute
+  PayrollAvancesAvancesRoute: typeof PayrollAvancesAvancesRoute
+  PayrollBaremesBaremesRoute: typeof PayrollBaremesBaremesRoute
+  PayrollCalculMensuelCalculMensuelRoute: typeof PayrollCalculMensuelCalculMensuelRoute
+  PayrollCloturesCloturesRoute: typeof PayrollCloturesCloturesRoute
+  PayrollPrimesPrimesRoute: typeof PayrollPrimesPrimesRoute
+  PayrollRetenuesRetenuesRoute: typeof PayrollRetenuesRetenuesRoute
 }
 
 const PayrollRouteRouteChildren: PayrollRouteRouteChildren = {
-  PayrollAvancesRoute: PayrollAvancesRoute,
-  PayrollBaremesRoute: PayrollBaremesRoute,
-  PayrollCalculMensuelRoute: PayrollCalculMensuelRoute,
-  PayrollCloturesRoute: PayrollCloturesRoute,
-  PayrollPrimesRoute: PayrollPrimesRoute,
-  PayrollRetenuesRoute: PayrollRetenuesRoute,
+  PayrollAvancesAvancesRoute: PayrollAvancesAvancesRoute,
+  PayrollBaremesBaremesRoute: PayrollBaremesBaremesRoute,
+  PayrollCalculMensuelCalculMensuelRoute:
+    PayrollCalculMensuelCalculMensuelRoute,
+  PayrollCloturesCloturesRoute: PayrollCloturesCloturesRoute,
+  PayrollPrimesPrimesRoute: PayrollPrimesPrimesRoute,
+  PayrollRetenuesRetenuesRoute: PayrollRetenuesRetenuesRoute,
 }
 
 const PayrollRouteRouteWithChildren = PayrollRouteRoute._addFileChildren(
@@ -895,19 +879,17 @@ const PayrollRouteRouteWithChildren = PayrollRouteRoute._addFileChildren(
 )
 
 interface ProductionRouteRouteChildren {
-  ProductionArticlesRoute: typeof ProductionArticlesRoute
-  ProductionAvancementRoute: typeof ProductionAvancementRoute
-  ProductionConsommationRoute: typeof ProductionConsommationRoute
-  ProductionLotsRoute: typeof ProductionLotsRoute
   ProductionIndexRoute: typeof ProductionIndexRoute
+  ProductionArticlesIndexRoute: typeof ProductionArticlesIndexRoute
+  ProductionAvancementIndexRoute: typeof ProductionAvancementIndexRoute
+  ProductionLotsIndexRoute: typeof ProductionLotsIndexRoute
 }
 
 const ProductionRouteRouteChildren: ProductionRouteRouteChildren = {
-  ProductionArticlesRoute: ProductionArticlesRoute,
-  ProductionAvancementRoute: ProductionAvancementRoute,
-  ProductionConsommationRoute: ProductionConsommationRoute,
-  ProductionLotsRoute: ProductionLotsRoute,
   ProductionIndexRoute: ProductionIndexRoute,
+  ProductionArticlesIndexRoute: ProductionArticlesIndexRoute,
+  ProductionAvancementIndexRoute: ProductionAvancementIndexRoute,
+  ProductionLotsIndexRoute: ProductionLotsIndexRoute,
 }
 
 const ProductionRouteRouteWithChildren = ProductionRouteRoute._addFileChildren(

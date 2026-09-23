@@ -5,6 +5,6 @@ function DepensesRecurrentesPage() {
   return <RecurringExpenses />
 }
 
-export const Route = createFileRoute('/expenses/depenses-recurrentes')({
+export const Route = createFileRoute('/expenses/depenses-recurrentes/')({
   component: DepensesRecurrentesPage,
 })

@@ -5,6 +5,6 @@ function AvancementPage() {
   return <ProductionProgress />
 }
 
-export const Route = createFileRoute('/production/avancement')({
+export const Route = createFileRoute('/production/avancement/')({
   component: AvancementPage,
 })

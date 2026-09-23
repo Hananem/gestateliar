@@ -5,6 +5,6 @@ function CalculMensuelPage() {
   return <PayrollMonthly />
 }
 
-export const Route = createFileRoute('/payroll/calcul-mensuel')({
+export const Route = createFileRoute('/payroll/calcul-mensuel/calcul-mensuel')({
   component: CalculMensuelPage,
 })

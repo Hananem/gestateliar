@@ -5,6 +5,6 @@ function BaremesPage() {
   return <PayrollRates />
 }
 
-export const Route = createFileRoute('/payroll/baremes')({
+export const Route = createFileRoute('/payroll/baremes/baremes')({
   component: BaremesPage,
 })

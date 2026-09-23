@@ -5,6 +5,6 @@ function CloturesPage() {
   return <PayrollClosures />
 }
 
-export const Route = createFileRoute('/payroll/clotures')({
+export const Route = createFileRoute('/payroll/clotures/clotures')({
   component: CloturesPage,
 })

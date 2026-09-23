@@ -5,6 +5,6 @@ function ArticlesPage() {
   return <ProductionArticles />
 }
 
-export const Route = createFileRoute('/production/articles')({
+export const Route = createFileRoute('/production/articles/')({
   component: ArticlesPage,
 })

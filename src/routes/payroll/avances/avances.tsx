@@ -5,6 +5,6 @@ function AvancesPage() {
   return <PayrollAdvances />
 }
 
-export const Route = createFileRoute('/payroll/avances')({
+export const Route = createFileRoute('/payroll/avances/avances')({
   component: AvancesPage,
 })
